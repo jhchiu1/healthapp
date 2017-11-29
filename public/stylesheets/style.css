@@ -1,0 +1,19 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: Tahoma;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.submit_button {
+  color: white;
+  background-color: purple;
+}
+
+.delete_button {
+  background-color: pink;
+  color: black;
+}

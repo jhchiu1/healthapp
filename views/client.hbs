@@ -1,0 +1,96 @@
+<h1>{{bird.name}}</h1>
+
+<div class="bird-info">
+
+    <h2>Description</h2>
+
+    <p>{{bird.description}}</p>
+
+    <h2>Height</h2>
+
+    <p>{{bird.height}}</p>
+
+    <h2>Average Eggs Laid</h2>
+
+    <p>{{bird.averageEggs}}</p>
+
+
+    <h2>Conservation Status</h2>
+
+    {{#if bird.endangered}}
+        <p>{{bird.name}} is endangered</p>
+    {{else}}
+        <p>{{bird.name}} is not endangered</p>
+    {{/if}}
+
+    <h2>Nest Information</h2>
+
+    <P>Location: {{bird.nest.location}}</p>
+    <P>Materials: {{bird.nest.materials}}</p>
+
+
+</div>
+
+<div class="dates-seen">
+
+    <h2>Dates Seen</h2>
+
+    <div class="new-sighting-form">
+
+        <h3>Report a new sighting</h3>
+        <form method="POST" action="/addSighting">
+            Sighting date: <input type="date" name="date">
+            <input type="hidden" name="_id" value="{{bird._id}}">
+            <input class="submit_button" type="submit" value="Submit">
+        </form>
+
+        <div class='flash-errors'>
+            {{#if messages}}
+                <p class="error-message">{{messages.error}}</p>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<div class="sighting">
+    {{#each bird.datesSeen}}
+        <p>{{formatDate this}}</p>
+    {{else}}
+    <p>No sightings for {{bird.name}}
+    {{/each}}
+</div>
+
+<div class="delete_bird">  <!-- Delete button for each bird page -->
+
+    <button id="myBtn">Modify Bird Information</button>
+
+    <!--  Used W3 schools tutorial for modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal form -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <form method="POST" action="/modBird">
+                Name: <input name="name" required value={{bird.name}}>
+                <br>Description: <input name="description" value="{{bird.description}}"/>
+                <br>Average Eggs: <input type="number" min="1" max="50" name="averageEggs" value={{bird.averageEggs}}>
+                <br>Endangered? <input type="checkbox" name="endangered" value={{bird.endangered}}/>
+                <br>Nest location: <input name="nestLocation" value={{bird.nest.nestLocation}}>
+                <br>Nest materials: <input name="nestMaterials" value={{bird.nest.nestMaterials}}>
+                <br>Height in inches: <input type = "number" name="height" min="1" max="250"value={{bird.height}}>
+                <br><input type="submit" value="submit">
+            </form>
+        </div>
+
+    </div>
+    <br><br>
+    <form action="/delete" method="POST" class="delete_form">   <!-- Delete button -->
+        <input type="hidden" name="_id" value="{{bird._id}}">
+        <input class="delete_button" type="submit" name="done" value="Delete this Bird">
+    </form>
+    <br>
+</div>
+
+</div>
+
+<script src="/javascripts/check.js"></script>  <!-- Javascript file for message box -->
