@@ -1,19 +1,135 @@
 body {
+  background-color: black;
+  color: #ccccff;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 18px;
   font-family: Tahoma;
 }
 
 a {
-  color: #00B7FF;
+  color: #ccffcc;
+}
+
+p {
+  font-weight: bold;
 }
 
 .submit_button {
   color: white;
   background-color: purple;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 18px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
 }
 
 .delete_button {
   background-color: pink;
   color: black;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 18px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+}
+
+h1 {
+  color: #00ffcc;
+  font-size: 55px;
+  text-align: left;
+  font-family: Tahoma;
+  letter-spacing: 8px;
+  font-weight: bold;
+  margin-top: 30px;
+  background: -webkit-linear-gradient(left, #f4d27a, #19f3f3, #00ffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  color: #00ffcc;
+  font-size: 40px;
+  text-align: left;
+  font-family: Tahoma;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-top: 50px;
+  background: -webkit-linear-gradient(left, #cc00ff, #f4d27a, #19f3f3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h3 {
+  color: #00ffcc;
+  font-size: 30px;
+  text-align: left;
+  font-family: Tahoma;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-top: 30px;
+  background: -webkit-linear-gradient(left, #f4d27a, #19f3f3, #00ffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.button {
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 12px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #19f3f3;
+  background-color: #34373a;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+  margin-left: 440px;
+}
+
+
+a:visited {
+  color: #f006d4;
+  text-decoration: none;
+  border: 0 none;
+}
+.button:hover, .submit_button:hover, .delete_button:hover{
+  background-color: #19f3f3;
+  color: #34373a;
+  -webkit-animation: bounce .3s infinite alternate;
+  -moz-animation: bounce .3s infinite alternate;
+  animation: bounce .3s infinite alternate;
+  animation-iteration-count:2;
+}
+@-webkit-keyframes bounce {
+  to { -webkit-transform: scale(1.2); }
+}
+@-moz-keyframes bounce {
+  to { -moz-transform: scale(1.2); }
+}
+@keyframes bounce {
+  to { transform: scale(1.2); }
+}
+
+
+.button:active, .submit_button:active, .delete_button:active{
+  background-color: #19f3f3;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }

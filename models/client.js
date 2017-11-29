@@ -27,11 +27,12 @@ var clientSchema = new mongoose.Schema({
     },
     first: String,
     last: String,
-    sex: { type: Boolean, default: false },        // Client male or female?
+    Male: { type: Boolean, default: false },        // Client male or female?
+    Female: { type: Boolean, default: false },
     height: {
         type: Number,
-        min: [24, 'Should be at least 24 inches'],
-        max: [150, 'Should not be more than 150 inches.'] },    // At least 24 inches, no more than 150 inches.
+        min: [2, 'Should be at least 2 feet'],
+        max: [10, 'Should not be more than 10 feet.'] },    // At least 24 inches, no more than 150 inches.
     weight: {
         type: Number,
         min: [50, 'Should be at least 50 lbs.'],

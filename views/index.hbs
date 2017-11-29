@@ -1,16 +1,18 @@
-<h1>Client Record</h1>
+<h1>[ HealthApp ]</h1>
+<h2>||- Client Record -||</h2>
 
 <div class="new-client">
 
-    <h2>Add a new client</h2>
+    <h3>Add a new client...</h3>
 
     <form method="POST" action="/addClient">
-        Name: <input name="first" required /> <input name="last" required />
-        <br>Sex <input type="checkbox" name="sex"/>
-        <br>Height: <input type="number" min="24" max="150" name="height"/>
-        <br>Weight: <input type="number" min="50" max="700" name="weight"/>
-        <br>Heart Rate: <input type="number" min="30" max="250" name="heart"/>
-        <br>Notes: <input name="notes" />
+        <p>First Name: <input name="first" required /> <br>
+            <p>Last Name: <input name="last" required /></p>
+        <p>Male <input type="checkbox" name="male"/>   Female <input type="checkbox" name="female"/></p>
+        <p>Height: <input type="number" min="2" max="10" name="height"/> ft</p>
+        <p>Weight: <input type="number" min="50" max="700" name="weight"/> lbs</p>
+        <p>Heart Rate: <input type="number" min="30" max="250" name="heart"/> bpm</p>
+        <p>Notes: <input name="notes" /></p>
         <br><input class="submit_button" type="submit" value="Submit">
     </form>
 </div>

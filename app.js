@@ -22,8 +22,9 @@ mongoose.connect(db_url, { useMongoClient: true })
     .then( () => {  console.log('Connected to MongoDB') } )
     .catch( (err) => { console.log('Error Connecting to MongoDB', err); });
 
-// Require both routes files
-var client = require('./routes/client');
+// Require routes files
+//var client = require('./routes/client');
+var tasks = require('./routes/tasks');
 var auth = require('./routes/auth');
 
 var app = express();
@@ -52,7 +53,7 @@ app.use(session({
     secret: 'replace me with long random string',
     resave: true,
     saveUninitialized: true,
-    store: new MongoDBStore( { url: session_url })
+    store: new MongoDBStore( { uri: session_url })
 }));
 
 
