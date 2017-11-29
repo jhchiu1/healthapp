@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var Bird = require('../models/bird');
+var Client = require('../models/client');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    Bird.find().select( { name: 1, description : 1 } ).sort( { name: 1 } )
+    Client.find().select( { name: 1, description : 1 } ).sort( { name: 1 } )
         .then( ( docs ) => {
         console.log(docs);
-    res.render('index', { title: "All Birds", birds: docs });
+    res.render('index', { title: "All Clients", client: docs });
 } ).catch ((err) => {
         next(err)
     });
@@ -23,43 +23,27 @@ router.post('/delete', function(req, res, next){    // Delete button added
         res.redirect('/');
 
     } else {
-        // The task was not found. Report 404 error.
-        res.status(404).send('Error deleting bird: not found');
+        // The client was not found. Report 404 error.
+        res.status(404).send('Error deleting client: not found');
     }
 })
 .catch((err) => {
 
         next(err);   // Will handle invalid ObjectIDs or DB errors.
 });
-
 });
 
 
-router.post('/modBird', function(req, res, next) {  // Modify button
-    Bird.findOneAndUpdate( {_id: req.body._id}, {$set: {description : "description"}} )  // Modify description
-        .then((modifiedBird) => {
-        if (modifiedBird) {   // Name of the document prior to update
-            res.redirect('/')  // Redirect to home after updated
-        } else {
-            // 404 error if update cannot be made
-            res.status(404).send("Error modifying this bird");
-}
-}).catch((err) => {
-        next(err);
-})
-
-});
-
-// POST to create new bird
-router.post('/addBird', function(req, res, next) {
-    // Use form data to create new bird save to DB
-    var bird = Bird(req.body);
+// POST to create new client
+router.post('/addClient', function(req, res, next) {
+    // Use form data to create new client save to DB
+    var client = Client(req.body);
     // Form data as key value pairs
-    bird.nest = {
+    client.nest = {
         location: req.body.nestLocation,
         materials: req.body.nestMaterials
     };
-    bird.save()
+    client.save()
         .then ( (doc) => {
         console.log(doc);
     res.redirect('/')
@@ -79,17 +63,17 @@ else {
 });
 });
 
-// GET info about 1 bird
-router.get('/bird/:_id', function(req, res, next) {
+// GET info about 1 client
+router.get('/client/:_id', function(req, res, next) {
 
-    Bird.findOne( { _id:  req.params._id})
+    Client.findOne( { _id:  req.params._id})
         .then( (doc) => {
         if (doc) {
-            res.render('bird', { bird: doc });
+            res.render('client', { client: doc });
 
         } else {
             res.status(404);
-    next(Error("Bird not found"));
+    next(Error("Client not found"));
 }
 })
 .catch( (err) => {
@@ -97,17 +81,17 @@ router.get('/bird/:_id', function(req, res, next) {
 });
 });
 
-// POST to add new sighting for bird
-router.post('/addSighting', function(req, res, next){
+// POST to add new update for client
+router.post('/addUpdate', function(req, res, next){
 
     // Push new date onto datesSeen array and then sort in date order.
-    Bird.findOneAndUpdate( {_id : req.body._id}, { $push : { datesSeen : { $each: [req.body.date], $sort: 1} } }, {runValidators : true})
+    Client.findOneAndUpdate( {_id : req.body._id}, { $push : { datesSeen : { $each: [req.body.date], $sort: 1} } }, {runValidators : true})
         .then( (doc) => {
         if (doc) {
-            res.redirect('/bird/' + req.body._id);   // Redirect to this bird's info page
+            res.redirect('/client/' + req.body._id);   // Redirect to this client's info page
         }
         else {
-            res.status(404);  next(Error("Attempt to add sighting to bird not in database"))
+            res.status(404);  next(Error("Attempt to add update failed, client not in database"))
 }
 })
 .catch( (err) => {
@@ -116,17 +100,16 @@ router.post('/addSighting', function(req, res, next){
 
     if (err.name === 'CastError') {
         req.flash('error', 'Date must be in a valid date format');
-        res.redirect('/bird/' + req.body._id);
+        res.redirect('/client/' + req.body._id);
     }
     else if (err.name === 'ValidationError') {
         req.flash('error', err.message);
-        res.redirect('/bird/' + req.body._id);
+        res.redirect('/client/' + req.body._id);
     }
     else {
         next(err);
     }
 });
-
 });
 
 

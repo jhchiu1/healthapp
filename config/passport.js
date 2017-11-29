@@ -35,8 +35,6 @@ var User = require('../models/user');
 
  */
 
-
-
 module.exports = function(passport) {
 
     /* serializeUser and deserializeUser are related to passport's session setup.

@@ -1,46 +1,52 @@
-<h1>{{bird.name}}</h1>
+<h1>{{client.name}}</h1>
 
-<div class="bird-info">
+<div class="client-info">
 
-    <h2>Description</h2>
+    <h2>First Name</h2>
 
-    <p>{{bird.description}}</p>
+    <p>{{client.first}}</p>
+
+    <h2>Last Name</h2>
+
+    <p>{{client.last}}</p>
+
+    <h2>Sex</h2>
+
+    {{#if client.sex}}
+        <p>{{client.first}} {{client.last}} is male</p>
+    {{else}}
+        <p>{{client.first}} {{client.last}} is female</p>
+    {{/if}}
 
     <h2>Height</h2>
 
-    <p>{{bird.height}}</p>
+    <p>{{client.height}}</p>
 
-    <h2>Average Eggs Laid</h2>
+    <h2>Weight</h2>
 
-    <p>{{bird.averageEggs}}</p>
+    <p>{{client.weight}}</p>
 
+    <h2>Heart Rate</h2>
 
-    <h2>Conservation Status</h2>
+    <p>{{client.heart}}</p>
 
-    {{#if bird.endangered}}
-        <p>{{bird.name}} is endangered</p>
-    {{else}}
-        <p>{{bird.name}} is not endangered</p>
-    {{/if}}
+    <h2>Notes</h2>
 
-    <h2>Nest Information</h2>
-
-    <P>Location: {{bird.nest.location}}</p>
-    <P>Materials: {{bird.nest.materials}}</p>
+    <p>{{client.notes}}</p>
 
 
 </div>
 
-<div class="dates-seen">
+<div class="dates-update">
 
     <h2>Dates Seen</h2>
 
-    <div class="new-sighting-form">
+    <div class="new-update-form">
 
-        <h3>Report a new sighting</h3>
-        <form method="POST" action="/addSighting">
+        <h3>Update client's record</h3>
+        <form method="POST" action="/addUpdate">
             Sighting date: <input type="date" name="date">
-            <input type="hidden" name="_id" value="{{bird._id}}">
+            <input type="hidden" name="_id" value="{{client._id}}">
             <input class="submit_button" type="submit" value="Submit">
         </form>
 
@@ -52,45 +58,23 @@
     </div>
 </div>
 
-<div class="sighting">
-    {{#each bird.datesSeen}}
+<div class="update">
+    {{#each client.datesUpdate}}
         <p>{{formatDate this}}</p>
     {{else}}
-    <p>No sightings for {{bird.name}}
+    <p>No updates for {{client.name}}
     {{/each}}
 </div>
 
-<div class="delete_bird">  <!-- Delete button for each bird page -->
-
-    <button id="myBtn">Modify Bird Information</button>
-
-    <!--  Used W3 schools tutorial for modal -->
-    <div id="myModal" class="modal">
-        <!-- Modal form -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-
-            <form method="POST" action="/modBird">
-                Name: <input name="name" required value={{bird.name}}>
-                <br>Description: <input name="description" value="{{bird.description}}"/>
-                <br>Average Eggs: <input type="number" min="1" max="50" name="averageEggs" value={{bird.averageEggs}}>
-                <br>Endangered? <input type="checkbox" name="endangered" value={{bird.endangered}}/>
-                <br>Nest location: <input name="nestLocation" value={{bird.nest.nestLocation}}>
-                <br>Nest materials: <input name="nestMaterials" value={{bird.nest.nestMaterials}}>
-                <br>Height in inches: <input type = "number" name="height" min="1" max="250"value={{bird.height}}>
-                <br><input type="submit" value="submit">
-            </form>
-        </div>
-
-    </div>
+<div class="delete_client">  <!-- Delete button for each bird page -->
     <br><br>
     <form action="/delete" method="POST" class="delete_form">   <!-- Delete button -->
-        <input type="hidden" name="_id" value="{{bird._id}}">
-        <input class="delete_button" type="submit" name="done" value="Delete this Bird">
+        <input type="hidden" name="_id" value="{{client._id}}">
+        <input class="delete_button" type="submit" name="done" value="Delete this Client">
     </form>
     <br>
 </div>
 
-</div>
+
 
 <script src="/javascripts/check.js"></script>  <!-- Javascript file for message box -->

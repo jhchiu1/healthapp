@@ -23,7 +23,7 @@ mongoose.connect(db_url, { useMongoClient: true })
     .catch( (err) => { console.log('Error Connecting to MongoDB', err); });
 
 // Require both routes files
-var tasks = require('./routes/tasks');
+var client = require('./routes/client');
 var auth = require('./routes/auth');
 
 var app = express();
@@ -41,7 +41,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure passport and session store
-var store = MongoDBStore( { uri: db_url, collection : 'tasks_sessions'} );
+var store = MongoDBStore( { uri: db_url, collection : 'healthapp_sessions'} );
 
 var mongo_pw = process.env.MONGO_PW;
 var url = 'mongodb://dbUser:password23@ds123956.mlab.com:23956/healthapp';

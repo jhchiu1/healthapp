@@ -1,30 +1,47 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
-/* Information about a bird species, and dates this bird was seen */
+/* Information about a client, and dates this client's record was updated */
 
-var birdSchema = new mongoose.Schema({
-    name: { type: String, required: [true, 'Bird name is required.'],
+var clientSchema = new mongoose.Schema({
+    first: { type: String, required: [true, 'Client FIRST name is required.'],
         unique: true,
         uniqueCaseInsensitive: true,
         validate: {
             validator: function(n) {
                 return n.length >= 2;
             },
-            message: '{VALUE} is not valid, bird name must be at least 2 letters'
+            message: '{VALUE} is not valid, client FIRST name must be at least 2 letters'
         }
-    },             // species name e.g. Great Horned Owl. Required and must be unique, and at least 2 letters long.
-    description: String,                                       // e.g. "Large brown owl"
-    averageEggs: {
-        type: Number,
-        min: [1, 'Should be at least 1 egg.'],
-        max: [50, 'Should not be more than 50 eggs.'] },    // At least 1, no more than 50
+    },             // Validation where unique client name required being at least 2 letters long.
+
+    last: { type: String, required: [true, 'Client LAST name is required.'],
+        unique: true,
+        uniqueCaseInsensitive: true,
+        validate: {
+            validator: function(n) {
+                return n.length >= 2;
+            },
+            message: '{VALUE} is not valid, client LAST name must be at least 2 letters'
+        }
+    },
+    first: String,
+    last: String,
+    sex: { type: Boolean, default: false },        // Client male or female?
     height: {
         type: Number,
-        min: [1, 'Should be at least 12 inches'],
-        max: [300, 'Should not be more than 150 inches.'] },    // At least 1, no more than 50
-    endangered: { type: Boolean, default: false },        // Is bird species threatened with extinction?
-    datesSeen: [ {
+        min: [24, 'Should be at least 24 inches'],
+        max: [150, 'Should not be more than 150 inches.'] },    // At least 24 inches, no more than 150 inches.
+    weight: {
+        type: Number,
+        min: [50, 'Should be at least 50 lbs.'],
+        max: [700, 'Should not be more than 700 lbs.'] },    // At least 50 lbs, no more than 700 lbs.
+    heart: {
+        type: Number,
+        min: [50, 'Should be at least 30 bpm.'],
+        max: [700, 'Should not be more than 250 bpm.'] },    // At least 30 bpm, no more than 250 bpm
+    notes: String,
+    datesUpdate: [ {
         type: Date,
         required: true,
         validate: {
@@ -34,15 +51,11 @@ var birdSchema = new mongoose.Schema({
             },
             message: 'Date must be a valid date. Date must be now or in the past.'
         }
-    } ],  // An array of dates a bird of this species was seen. Must be now, or in the past
-    nest: {
-        location: String,
-        materials: String
-    }
+    } ],  // An array of dates when client record was updated. Must be now, or in the past
 });
 
-var Bird = mongoose.model('Bird', birdSchema);
-birdSchema.plugin(uniqueValidator);
+var Client = mongoose.model('Client', clientSchema);
+clientSchema.plugin(uniqueValidator);
 
-module.exports = Bird;
+module.exports = Client;
 
