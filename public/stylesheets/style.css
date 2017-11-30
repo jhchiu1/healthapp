@@ -14,46 +14,16 @@ p {
   font-weight: bold;
 }
 
-.submit_button {
-  color: white;
-  background-color: purple;
-  font-family: Tahoma;
-  display: inline-block;
-  padding: 5px 15px;
-  font-size: 18px;
-  cursor: crosshair;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  border:  2px solid #19f3f3;
-  border-radius: 3px;
-  box-shadow: 0 1px black;
-}
-
-.delete_button {
-  background-color: pink;
-  color: black;
-  font-family: Tahoma;
-  display: inline-block;
-  padding: 5px 15px;
-  font-size: 18px;
-  cursor: crosshair;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  border:  2px solid #19f3f3;
-  border-radius: 3px;
-  box-shadow: 0 1px black;
-}
 
 h1 {
   color: #00ffcc;
-  font-size: 55px;
+  font-size: 60px;
   text-align: left;
   font-family: Tahoma;
   letter-spacing: 8px;
   font-weight: bold;
-  margin-top: 30px;
+  margin-top: 0px;
+  padding-top: 0px;
   background: -webkit-linear-gradient(left, #f4d27a, #19f3f3, #00ffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -85,6 +55,69 @@ h3 {
   -webkit-text-fill-color: transparent;
 }
 
+.delete_button {
+  background-color: pink;
+  color: white;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 18px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+}
+
+.login_button, .signup_button, .submit_button {
+  background-color: #830993;
+  color: white;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 18px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+}
+
+.todo_button, .logout_button {
+  background-color: #B924A3  ;
+  color: white;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 18px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+}
+
+.completed_button, .home_button {
+  background-color: #7DF5A6;
+  color: purple;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 18px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+}
 
 .button {
   font-family: Tahoma;
@@ -109,9 +142,10 @@ a:visited {
   text-decoration: none;
   border: 0 none;
 }
-.button:hover, .submit_button:hover, .delete_button:hover{
+.button:hover, .submit_button:hover, .delete_button:hover, .logout_button:hover, .home_button:hover, .login_button:hover,
+.signup_button:hover, .todo_button:hover, .completed_button:hover{
   background-color: #19f3f3;
-  color: #34373a;
+  color: white;
   -webkit-animation: bounce .3s infinite alternate;
   -moz-animation: bounce .3s infinite alternate;
   animation: bounce .3s infinite alternate;
@@ -128,8 +162,35 @@ a:visited {
 }
 
 
-.button:active, .submit_button:active, .delete_button:active{
+.button:active, .submit_button:active, .delete_button:active, .logout_button:active, .home_button:active, .login_button:active,
+.signup_button:active, .todo_button:active, .completed_button:active{
   background-color: #19f3f3;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+::-webkit-scrollbar-track {
+  background-color: #474747;
+  border-left: 1px solid #474747;
+
+}
+::-webkit-scrollbar-thumb {
+  background-color: #f006d4;
+  background-image: -webkit-gradient(linear,
+  40% 0%,
+  75% 84%,
+  from(#f006d4),
+  to(#f4d27a),
+  color-stop(.6,#19f3f3))
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #f4d27a;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
 }

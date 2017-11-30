@@ -1,4 +1,4 @@
-<h1>{{client.name}}</h1>
+<h1>{{client.first}} {{client.last}}</h1>
 
 <div class="client-info">
 
@@ -13,9 +13,9 @@
     <h2>Sex</h2>
 
     {{#if client.sex}}
-        <p>{{client.male}} is male</p>
+        <p>{{client.first}} is male</p>
     {{else}}
-        <p>{{client.female}} is female</p>
+        <p>{{client.first}} is female</p>
     {{/if}}
 
     <h2>Height (Feet) </h2>
@@ -66,7 +66,7 @@
     {{/each}}
 </div>
 
-<div class="delete_client">  <!-- Delete button for each bird page -->
+<div class="delete_client">  <!-- Delete button for each client page -->
     <br><br>
     <form action="/delete" method="POST" class="delete_form">   <!-- Delete button -->
         <input type="hidden" name="_id" value="{{client._id}}">

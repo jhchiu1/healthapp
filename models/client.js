@@ -39,8 +39,8 @@ var clientSchema = new mongoose.Schema({
         max: [700, 'Should not be more than 700 lbs.'] },    // At least 50 lbs, no more than 700 lbs.
     heart: {
         type: Number,
-        min: [50, 'Should be at least 30 bpm.'],
-        max: [700, 'Should not be more than 250 bpm.'] },    // At least 30 bpm, no more than 250 bpm
+        min: [30, 'Should be at least 30 bpm.'],
+        max: [250, 'Should not be more than 250 bpm.'] },    // At least 30 bpm, no more than 250 bpm
     notes: String,
     datesUpdate: [ {
         type: Date,

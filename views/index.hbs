@@ -3,19 +3,28 @@
 
 <div class="new-client">
 
-    <h3>Add a new client...</h3>
+    <h3>Add a new client . . .</h3>
 
     <form method="POST" action="/addClient">
-        <p>First Name: <input name="first" required /> <br>
-            <p>Last Name: <input name="last" required /></p>
+        <p>First Name <input name="first" required /> <br>
+            <p>Last Name <input name="last" required /></p>
         <p>Male <input type="checkbox" name="male"/>   Female <input type="checkbox" name="female"/></p>
-        <p>Height: <input type="number" min="2" max="10" name="height"/> ft</p>
-        <p>Weight: <input type="number" min="50" max="700" name="weight"/> lbs</p>
-        <p>Heart Rate: <input type="number" min="30" max="250" name="heart"/> bpm</p>
-        <p>Notes: <input name="notes" /></p>
+        <p>Height <input type="number" min="2" max="10" name="height"/> ft</p>
+        <p>Weight <input type="number" min="50" max="700" name="weight"/> lbs</p>
+        <p>Heart Rate <input type="number" min="30" max="250" name="heart"/> bpm</p>
+        <p>Notes <input name="notes" /></p>
         <br><input class="submit_button" type="submit" value="Submit">
     </form>
 </div>
+
+
+<p><input class="todo_button" type="submit" value="To Do Tasks" action="/tasks">
+
+<input class="completed_button" type="submit" value="Completed" action="/completed">
+
+<p><input class="home_button" type="submit" value="Home" action="/auth">
+
+<input class="logout_button" type="submit" value="Logout" action="/logout">
 
 <div class='flash-errors'>
     {{#if messages}}

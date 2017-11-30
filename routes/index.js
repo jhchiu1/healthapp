@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/delete', function(req, res, next){    // Delete button added
 
-    Bird.deleteOne( { _id : req.body._id } )
+    Client.deleteOne( { _id : req.body._id } )
         .then( (result) => {
 
         if (result.deletedCount === 1) {

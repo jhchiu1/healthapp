@@ -9,7 +9,7 @@
 
 <div id='login'>
 
-    <h2>Log in</h2>
+    <h2>||- Log in -||</h2>
 
     <form action="/auth/login" method="POST">
         <label for="username">Username</label>
@@ -17,15 +17,15 @@
         <br>
         <label for="password">Password</label>
         <input type="password" name="password" required>
-        <br>
-        <input type="submit" value="Login">
+        <p>
+        <input class="login_button" type="submit" value="Login">
     </form>
 
 </div>
 
 <div id='signup'>
 
-    <h2>Sign up for an account</h2>
+    <h2>||- Sign Up For An Account -||</h2>
 
     <form action="/auth/signup" method="POST">
         <label for="username">Username</label>
@@ -33,13 +33,10 @@
         <br>
         <label for="password">Password</label>
         <input type="password" name="password" required>
-        <br>
-        <input type="submit" value="Sign up">
+        <p>
+        <input class="signup_button" type="submit" value="Sign up">
     </form>
 <br><br>
-    <div class="navigation">
-        <a href="/">To do tasks</a> <a href="/completed">Completed Tasks</a>
-        <br><br><a href="/auth/logout">Logout</a>
-    </div>
+
 
 </div>
