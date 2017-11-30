@@ -1,4 +1,5 @@
-<h1>[ HealthApp ]</h1>
+<a href="/auth"><h1>[ HealthApp &#9829; ]</h1></a><p>
+
 <h2>||- Client Record -||</h2>
 
 <div class="new-client">
@@ -8,23 +9,23 @@
     <form method="POST" action="/addClient">
         <p>First Name <input name="first" required /> <br>
             <p>Last Name <input name="last" required /></p>
-        <p>Male <input type="checkbox" name="male"/>   Female <input type="checkbox" name="female"/></p>
+        <p>Male? <input type="checkbox" name="male"/>
         <p>Height <input type="number" min="2" max="10" name="height"/> ft</p>
         <p>Weight <input type="number" min="50" max="700" name="weight"/> lbs</p>
         <p>Heart Rate <input type="number" min="30" max="250" name="heart"/> bpm</p>
         <p>Notes <input name="notes" /></p>
-        <br><input class="submit_button" type="submit" value="Submit">
+        <br><input class="submit_button" type="submit" value="S  U  B  M  I  T  ">
     </form>
 </div>
 
 
-<p><input class="todo_button" type="submit" value="To Do Tasks" action="/tasks">
+<p><a href="/tasks/tasklist"><input class="todo_button" type="submit" value="TO DO TASKS"></a>
 
-<input class="completed_button" type="submit" value="Completed" action="/completed">
+    <a href="/tasks_completed/tasklist"><input class="completed_button" type="submit" value="COMPLETED TASKS"></a>
 
-<p><input class="home_button" type="submit" value="Home" action="/auth">
+<p><a href="/auth"><input class="home_button" type="submit" value="H  O  M  E  "></a>
 
-<input class="logout_button" type="submit" value="Logout" action="/logout">
+    <a href="/logout"><input class="logout_button" type="submit" value="LOGOUT"></a>
 
 <div class='flash-errors'>
     {{#if messages}}
@@ -36,9 +37,8 @@
     <h2>Client List</h2>
     <div class="client-summary">
         {{#each clients}}
-            <h3>{{this.name}}</h3>
-            <h3>{{this.description}}</h3>
-            <P><a href="/client/{{this._id}}">{{this.name}} Info and Updates</a></p>
+            <h3>{{this.first}} {{this.last}}</h3>
+            <P><a href="/client/{{this._id}}">{{this.first}} {{this.last}} Info and Updates</a></p>
         {{else}}
             <p>No clients in the database.</p>
         {{/each}}

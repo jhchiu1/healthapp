@@ -1,9 +1,3 @@
-/* authentication routes. Remember these routes are mounted at
-/auth so all the paths are prefixed with /auth in the app.
-so the authentication page is at /auth/
-the login route is at /auth/login
-etc.  */
-
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');

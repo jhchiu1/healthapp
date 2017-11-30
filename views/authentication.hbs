@@ -1,5 +1,7 @@
+<a href="/auth"><h1>[ HealthApp &#9829; ]</h1></a><p>
 <div id="auth-messages">
 
+    <!-- Sign up failure messages -->
     <ul>{{#each messages}}
         <li>{{this}}</li>
     {{/each}}
@@ -18,10 +20,15 @@
         <label for="password">Password</label>
         <input type="password" name="password" required>
         <p>
-        <input class="login_button" type="submit" value="Login">
+        <input class="login_button" type="submit" value="L O G I N ">
     </form>
 
 </div>
+
+<h2>||- Log in with Twitter -||</h2>
+
+<p><a href="/auth/twitter"><input class="twitter_button" type="submit" value="S I G N   I N   W I T H   T W I T T E R"></a></p>
+
 
 <div id='signup'>
 
@@ -34,7 +41,7 @@
         <label for="password">Password</label>
         <input type="password" name="password" required>
         <p>
-        <input class="signup_button" type="submit" value="Sign up">
+        <input class="signup_button" type="submit" value="S I G N   U P ">
     </form>
 <br><br>
 

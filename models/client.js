@@ -27,8 +27,8 @@ var clientSchema = new mongoose.Schema({
     },
     first: String,
     last: String,
-    Male: { type: Boolean, default: false },        // Client male or female?
-    Female: { type: Boolean, default: false },
+    Male: { type: Boolean, default: false},        // Client male or female? Defaults to unchecked to indicate female
+
     height: {
         type: Number,
         min: [2, 'Should be at least 2 feet'],

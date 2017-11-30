@@ -1,3 +1,5 @@
+<a href="/auth"><h1>[ HealthApp &#9829; ]</h1></a><p>
+
 <h1>{{client.first}} {{client.last}}</h1>
 
 <div class="client-info">
@@ -13,9 +15,9 @@
     <h2>Sex</h2>
 
     {{#if client.sex}}
-        <p>{{client.first}} is male</p>
-    {{else}}
         <p>{{client.first}} is female</p>
+    {{else}}
+        <p>{{client.first}} is male</p>
     {{/if}}
 
     <h2>Height (Feet) </h2>
@@ -39,13 +41,13 @@
 
 <div class="dates-update">
 
-    <h2>Dates Seen</h2>
+    <h2>Dates Updated</h2>
 
     <div class="new-update-form">
 
-        <h3>Update client's record</h3>
+        <h3>Update record</h3>
         <form method="POST" action="/addUpdate">
-            Sighting date: <input type="date" name="date">
+            Update: <input type="date" name="date">
             <input type="hidden" name="_id" value="{{client._id}}">
             <input class="submit_button" type="submit" value="Submit">
         </form>
@@ -62,7 +64,7 @@
     {{#each client.datesUpdate}}
         <p>{{formatDate this}}</p>
     {{else}}
-    <p>No updates for {{client.name}}
+    <p>No updates for {{client.first}}  {{client.last}}
     {{/each}}
 </div>
 
@@ -75,6 +77,8 @@
     <br>
 </div>
 
+<p><a href="/tasks/tasklist"><input class="todo_button" type="submit" value="TO DO TASKS"></a>
 
+    <a href="/tasks_completed/tasklist"><input class="completed_button" type="submit" value="COMPLETED TASKS"></a>
 
 <script src="/javascripts/check.js"></script>  <!-- Javascript file for message box -->
