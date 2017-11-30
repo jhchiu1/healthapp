@@ -1,7 +1,4 @@
 var LocalStrategy = require('passport-local');
-var TwitterStrategy = require('passport-twitter');
-
-var configAuth = require('./auth');
 
 var User = require('../models/user');
 
@@ -35,11 +32,13 @@ var User = require('../models/user');
 
  */
 
+
+
 module.exports = function(passport) {
 
-    /* serializeUser and deserializeUser are related to passport's session setup.
-    These provide the ability to serialize the user (save to db)
-    and deserialize user (fetch from DB)
+    /* serializeUser and desrializeUser are related to passport's session setup.
+     These provide the ability to serialize the user (save to db)
+     and deserialize user (fetch from DB)
      */
 
     passport.serializeUser(function(user, done){
@@ -78,14 +77,14 @@ module.exports = function(passport) {
                 //And save. If no errors, return new User
                 newUser.save(function(err){
                     if (err) { return done(err); }
-                    return done(null, newUser);
+                    return done(null, newUser, req.flash('signupMsg', 'Welcome, ' + username));
                 });
             });
         });
     }));
 
 
-    // Similar to above, but for logging in (authenticating) users.
+    // Similar to above, but for logging in users.
 
     passport.use('local-login', new LocalStrategy({
         usernameField:'username',
@@ -115,43 +114,4 @@ module.exports = function(passport) {
         });
     }));
 
-
-    passport.use(new TwitterStrategy({
-        consumerKey: configAuth.twitterAuth.consumerKey,
-        consumerSecret: configAuth.twitterAuth.consumerSecret,
-        callbackUrl: configAuth.twitterAuth.callbackUrl
-    }, function(token, tokenSecret, profile, done){
-
-        process.nextTick(function(){
-
-            User.findOne( { 'twitter.id' : profile.id }, function (err, user) {
-
-                // Database error
-                if (err) { return done(err); }
-
-                // User already exists in our database
-                if (user) { return done(null, user); }
-
-                // User does not exist in our database, create document
-                // containing their Twitter authentication info and profile
-                var newUser = User();
-                var twitter = {
-                    id: profile.id,
-                    token: token,
-                    username: profile.username,
-                    displayName: profile.displayName
-                };
-
-                newUser.twitter = twitter;
-
-                newUser.save( function(err) {
-                    if (err) { return done(err); }
-                    return done(null, newUser);
-                });
-
-            });
-        });
-
-    }));
-
-}; // This is the end of module.exports = function(passport) { .... at the start
+};
