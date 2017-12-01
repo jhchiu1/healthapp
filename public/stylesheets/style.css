@@ -1,11 +1,24 @@
 body {
   background-color: black;
   color: #ccccff;
-  padding: 50px;
+  padding: 25px;
   font: 18px;
   font-family: Tahoma;
+  margin: 0px;
+  background-image: linear-gradient(to right, black, #0B1063, #5B2C6F );
 }
 
+#signup, #login {
+  margin-left: 335px;
+}
+
+.headlines {
+  margin-left: 335px;
+}
+
+.client-name-list {
+  margin-left: 335px;
+}
 a {
   color: #ccffcc;
   text-decoration: none;
@@ -19,7 +32,7 @@ p {
 h1 {
   color: #00ffcc;
   font-size: 60px;
-  text-align: left;
+  text-align: center;
   font-family: Tahoma;
   letter-spacing: 8px;
   font-weight: bold;
@@ -32,12 +45,12 @@ h1 {
 
 h2 {
   color: #00ffcc;
-  font-size: 40px;
-  text-align: left;
+  font-size: 30px;
   font-family: Tahoma;
   letter-spacing: 2px;
   font-weight: bold;
   margin-top: 50px;
+  margin-left: -8px;
   background: -webkit-linear-gradient(left, #cc00ff, #f4d27a, #19f3f3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -46,11 +59,24 @@ h2 {
 h3 {
   color: #00ffcc;
   font-size: 30px;
-  text-align: left;
   font-family: Tahoma;
   letter-spacing: 2px;
   font-weight: bold;
   margin-top: 30px;
+  margin-left: 315px;
+  background: -webkit-linear-gradient(left, #f4d27a, #19f3f3, #00ffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h4 {
+  color: #00ffcc;
+  font-size: 30px;
+  font-family: Tahoma;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-left: 0px;
   background: -webkit-linear-gradient(left, #f4d27a, #19f3f3, #00ffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -62,7 +88,7 @@ h3 {
   font-family: Tahoma;
   display: inline-block;
   padding: 5px 15px;
-  font-size: 18px;
+  font-size: 15px;
   cursor: crosshair;
   text-align: center;
   text-decoration: none;
@@ -78,7 +104,7 @@ h3 {
   font-family: Tahoma;
   display: inline-block;
   padding: 5px 15px;
-  font-size: 18px;
+  font-size: 15px;
   cursor: crosshair;
   text-align: center;
   text-decoration: none;
@@ -88,13 +114,13 @@ h3 {
   box-shadow: 0 1px black;
 }
 
-.todo_button, .logout_button {
+.todo_button {
   background-color: #B924A3  ;
   color: white;
   font-family: Tahoma;
   display: inline-block;
   padding: 5px 15px;
-  font-size: 18px;
+  font-size: 15px;
   cursor: crosshair;
   text-align: center;
   text-decoration: none;
@@ -102,15 +128,33 @@ h3 {
   border:  2px solid #19f3f3;
   border-radius: 3px;
   box-shadow: 0 1px black;
+  margin-left: 335px;
 }
 
-.completed_button, .home_button {
+.logout_button {
+  background-color: #B924A3  ;
+  color: white;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 15px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+  margin-left: 20px;
+}
+
+.home_button {
   background-color: #7DF5A6;
   color: purple;
   font-family: Tahoma;
   display: inline-block;
   padding: 5px 15px;
-  font-size: 18px;
+  font-size: 15px;
   cursor: crosshair;
   text-align: center;
   text-decoration: none;
@@ -118,13 +162,32 @@ h3 {
   border:  2px solid #19f3f3;
   border-radius: 3px;
   box-shadow: 0 1px black;
+  margin-left: 335px;
 }
+
+.completed_button {
+  background-color: #7DF5A6;
+  color: purple;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 15px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+  margin-left: 10px;
+}
+
 
 .button {
   font-family: Tahoma;
   display: inline-block;
   padding: 5px 15px;
-  font-size: 12px;
+  font-size: 15px;
   cursor: crosshair;
   text-align: center;
   text-decoration: none;
@@ -134,7 +197,7 @@ h3 {
   border:  2px solid #19f3f3;
   border-radius: 3px;
   box-shadow: 0 1px black;
-  margin-left: 440px;
+
 }
 
 
@@ -196,18 +259,6 @@ html, body {
   overflow-x: hidden;
 }
 
- .parallax {
-   /* The image used */
-   background-image: url("heartbg.jpg");
 
-   /* Set a specific height */
-   height: 500px;
-
-   /* Create the parallax scrolling effect */
-   background-attachment: fixed;
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: cover;
- }
 
 
