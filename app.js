@@ -65,31 +65,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect(url);
 
 app.use('/auth', auth);   // Order matters! Login page
-
 app.use('/users', users);        // Get user records
-
-
-
 app.use('/tasks', tasks);        // Tasklists
 app.use('/', index);        // For trainer to manage clients
 
-app.param('id', function(req, res, next, id){   // Fetch specific user record
-    user.findById(id, function(err, docs){
-        if(err) res.json(err);
-        else
-        {
-            req.userId = docs;
-            next();
-        }
-    });
-});
-
-app.get('/user/:id', function(req, res){           // Retrieve specific user record
-    user.find({_id: req.params.id}, function(err, docs){
-        if(err) res.json(err);
-        else    res.render('show', {user: docs[0]});
-    });
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
