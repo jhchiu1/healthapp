@@ -25,7 +25,6 @@ mongoose.connect(db_url, { useMongoClient: true })
 // Require routes files
 var tasks = require('./routes/tasks');
 var auth = require('./routes/auth');
-//var index = require('./routes/index');        // FOR TRAINER to manage clients
 
 var app = express();
 
@@ -63,17 +62,15 @@ app.use(passport.session());         // This creates an req.user variable for lo
 app.use(flash());
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.use('/auth', auth);   // Order matters! Login page
-app.use('/', tasks);        // Tasklists
-
-
 mongoose.connect(url);
 
-app.use('/', index);
+app.use('/auth', auth);   // Order matters! Login page
+
 app.use('/users', users);        // Get user records
-// app.use('/', index);        // FOR TRAINER to manage clients
+
+app.use('/tasks', tasks);        // Tasklists
+app.use('/', index);        // For trainer to manage clients
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
