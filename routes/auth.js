@@ -10,7 +10,7 @@ router.get('/', function(req, res, next){
 
 /* POST to login */
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
+    successRedirect: '/models/client',
     failureRedirect: '/auth',
     failureFlash: true
 }));
@@ -26,7 +26,7 @@ router.post('/signup', passport.authenticate('local-signup', {
 /* GET logout */
 router.get('/logout', function(req, res, next){
     req.logout();  // passport provides this
-    res.redirect('/');
+    res.redirect('/auth');
 });
 
 module.exports = router;
