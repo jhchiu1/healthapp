@@ -2,6 +2,22 @@ var express = require('express');
 var router = express.Router();
 var Client = require('../models/client');
 
+/* Middleware, to verify if the user is authenticated */
+function isLoggedIn(req, res, next) {
+    console.log('user is auth ', req.user)
+    if (req.isAuthenticated()) {
+        res.locals.username = req.user.local.username;
+        next();
+    } else {
+        res.redirect('/auth');
+    }
+}
+
+/* Apply this middleware to every route in the file, so don't need to
+specify it for every router */
+
+router.use(isLoggedIn);
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 

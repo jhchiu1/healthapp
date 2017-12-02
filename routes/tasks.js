@@ -22,11 +22,11 @@ router.use(isLoggedIn);
 
 
 /* GET home page with all incomplete tasks */
-router.get('/', function(req, res, next) {
+router.get('/task', function(req, res, next) {
 
     Task.find( { creator: req.user._id, completed: false})
         .then( (docs) => {
-            res.render('index', {title: 'Incomplete Tasks', tasks: docs})
+            res.render('tasks', {title: 'Incomplete Tasks', tasks: docs})
         })
         .catch( (err) => {
             next(err);
@@ -85,12 +85,12 @@ router.get('/completed', function(req, res, next){
 
 
 /* POST new task */
-router.post('/add', function(req, res, next){
+router.post('tasks/add', function(req, res, next){
 
     if (!req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
         req.flash('error', 'please enter a task');
-        res.redirect('/');
+        res.redirect('/task');
     }
 
     else {
@@ -101,13 +101,12 @@ router.post('/add', function(req, res, next){
         new Task( { creator: req.user._id, text: req.body.text, completed: false} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
-                res.redirect('/');
+                res.redirect('/task');
             })
             .catch((err) => {
                 next(err);   // most likely to be a database error.
             });
     }
-
 });
 
 

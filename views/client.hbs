@@ -13,13 +13,13 @@
     <p>{{client.last}}</p>
 
     <h2>Sex</h2>
-
+<div class="sexinfo">
     {{#if client.sex}}
         <p>{{client.first}} is female</p>
     {{else}}
         <p>{{client.first}} is male</p>
     {{/if}}
-
+</div>
     <h2>Height (Feet) </h2>
 
     <p>{{client.height}}</p>
@@ -43,42 +43,15 @@
 
     <h2>Dates Updated</h2>
 
-    <div class="new-update-form">
-
-        <h3>Update record</h3>
-        <form method="POST" action="/addUpdate">
-            Update: <input type="date" name="date">
-            <input type="hidden" name="_id" value="{{client._id}}">
-            <input class="submit_button" type="submit" value="Submit">
-        </form>
-
-        <div class='flash-errors'>
-            {{#if messages}}
-                <p class="error-message">{{messages.error}}</p>
-            {{/if}}
-        </div>
-    </div>
 </div>
 
-<div class="update">
-    {{#each client.datesUpdate}}
-        <p>{{formatDate this}}</p>
-    {{else}}
-    <p>No updates for {{client.first}}  {{client.last}}
-    {{/each}}
-</div>
+<p><a href="/auth"><input class="home_button" type="submit" value="H  O  M  E  "></a>
 
-<div class="delete_client">  <!-- Delete button for each client page -->
-    <br><br>
-    <form action="/delete" method="POST" class="delete_form">   <!-- Delete button -->
-        <input type="hidden" name="_id" value="{{client._id}}">
-        <input class="delete_button" type="submit" name="done" value="Delete this Client">
-    </form>
-    <br>
-</div>
+    <a href="/auth/logout"><input class="logout_button" type="submit" value="LOGOUT"></a>
 
-<p><a href="/tasks/tasklist"><input class="todo_button" type="submit" value="TO DO TASKS"></a>
+<p><a href="/tasks/task"><input class="todo_button" type="submit" value="TO DO TASKS"></a>
 
     <a href="/tasks/tasks_completed/tasklist"><input class="completed_button" type="submit" value="COMPLETED TASKS"></a>
+
 
 <script src="/javascripts/check.js"></script>  <!-- Javascript file for message box -->

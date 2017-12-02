@@ -29,7 +29,7 @@ var clientSchema = new mongoose.Schema({
     },
     first: String,
     last: String,
-    sex: {type: String, enum: ['Male', 'Female']},        // Client male or female? Defaults to unchecked to indicate female
+    sex: {type: String, enum: ['Male', 'Female']},
     age: {
         type: Number,
         min: [5, 'Should be at least 5 years old'],

@@ -22,6 +22,30 @@
     </form>
 </div>
 
+<div class="new-update-form">
+<h3>Update record</h3>
+<form method="POST" action="/addUpdate">
+    Update: <input type="date" name="date">
+    <input type="hidden" name="_id" value="{{client._id}}">
+    <input class="submit_button" type="submit" value="Submit">
+</form>
+
+<div class='flash-errors'>
+    {{#if messages}}
+        <p class="error-message">{{messages.error}}</p>
+    {{/if}}
+</div>
+</div>
+
+<div class="delete_client">  <!-- Delete button for each client page -->
+    <br><br>
+    <form action="/delete" method="POST" class="delete_form">   <!-- Delete button -->
+        <input type="hidden" name="_id" value="{{client._id}}">
+        <input class="delete_button" type="submit" name="done" value="Delete this Client">
+    </form>
+    <br>
+</div>
+
 
 <p><a href="/tasks/tasklist"><input class="todo_button" type="submit" value="TO DO TASKS"></a>
 

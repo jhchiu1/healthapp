@@ -7,18 +7,25 @@ body {
   margin: 0px;
   background-image: linear-gradient(to right, black, #0B1063, #5B2C6F );
 }
-
-#signup, #login {
-  margin-left: 335px;
+#authdiv {
+  margin-left: 392px;
 }
 
+.sexinfo {
+  margin-left: 385px;
+}
 .headlines {
   margin-left: 335px;
 }
 
 .client-name-list {
-  margin-left: 335px;
+  margin-left: 385px;
 }
+
+.tasklistalign {
+  text-align: center;
+}
+
 a {
   color: #ccffcc;
   text-decoration: none;
@@ -38,19 +45,19 @@ h1 {
   font-weight: bold;
   margin-top: 0px;
   padding-top: 0px;
-  background: -webkit-linear-gradient(left, #f4d27a, #19f3f3, #00ffff);
+  background: -webkit-linear-gradient(left, #F40E42   , #f4d27a, #00ffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-h2 {
+h5 {
   color: #00ffcc;
   font-size: 30px;
   font-family: Tahoma;
   letter-spacing: 2px;
   font-weight: bold;
   margin-top: 50px;
-  margin-left: -8px;
+  margin-left: 0px;
   background: -webkit-linear-gradient(left, #cc00ff, #f4d27a, #19f3f3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -78,6 +85,19 @@ h4 {
   margin-top: 30px;
   margin-left: 0px;
   background: -webkit-linear-gradient(left, #f4d27a, #19f3f3, #00ffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  color: #00ffcc;
+  font-size: 30px;
+  font-family: Tahoma;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-left: 385px;
+  background: -webkit-linear-gradient(left, #B80EF4, #f4d27a, #19f3f3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -246,7 +266,7 @@ a:visited {
   background-image: -webkit-gradient(linear,
   40% 0%,
   75% 84%,
-  from(#f006d4),
+  from(#B80EF4),
   to(#f4d27a),
   color-stop(.6,#19f3f3))
 }

@@ -1,10 +1,11 @@
 <a href="/auth"><h1>[ HealthApp &#9829; ]</h1></a><p>
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>TASKLIST</h1>
+<div class="tasklistalign">
+<p>Incomplete Tasks</p>
 
 <div class="taskform">
 <div class="addtask">
-    <form id="addtask_form" action="/add" method="POST">
+    <form id="addtask_form" action="tasks/add" method="POST">
         <input id="addtask_text" name="text" type="text" placeholder="todo task" required>
         <input id="addtask_button" name="add" type="submit" value="add">
     </form>
@@ -40,6 +41,6 @@
                 <input class="all_done_button" type="submit" value="Everything is done!">
             </form>
         {{/if}}</div>
-
+</div>
 </div>
 </div>
