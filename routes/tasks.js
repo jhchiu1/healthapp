@@ -101,7 +101,7 @@ router.post('tasks/add', function(req, res, next){
         new Task( { creator: req.user._id, text: req.body.text, completed: false} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
-                res.redirect('/task');
+                res.redirect('/tasks');
             })
             .catch((err) => {
                 next(err);   // most likely to be a database error.
