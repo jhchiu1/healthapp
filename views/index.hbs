@@ -7,16 +7,17 @@
     <h4>Add / Update client profile. . .</h4>
 
     <form method="POST" action="/addClient">
-        <p>First Name <input name="first" required /> <br>
-            <p>Last Name <input name="last" required /></p>
+        <p>First Name <input name="first" maxlength="20" required /> <br>
+            <p>Last Name <input name="last" maxlength="20" required /></p>
         <p>Sex <input name="sex" type="text" list="sexoptions"/>
             <datalist id="sexoptions"><option value="Male" label="Male"></option>
-            <option value="Female" label="Female"></option></datalist>
+                <option value="Female" label="Female"></option></datalist></p>
         <p>Age <input type="number" min="5" max="125" name="age"/> years old</p>
         <p>Height <input type="number" min="3" max="10" name="height"/> ft</p>
         <p>Weight <input type="number" min="50" max="700" name="weight"/> lbs</p>
         <p>Heart Rate <input type="number" min="30" max="250" name="heart"/> bpm</p>
-        <p>Notes <input name="notes" /></p>
+        <p>Notes <input name="notes" />
+            <textarea name="message" rows="5" cols="30"></textarea></p>
         <p>Date Updated <input name="datesUpdate" /></p>
         <br><input class="submit_button" type="submit" value="S  U  B  M  I  T  ">
     </form>
@@ -66,6 +67,7 @@
     <div class="client-summary">
         {{#each clients}}
             <h3>{{this.first}} {{this.last}}</h3>
+        <h3>{{this.profile}}</h3>
             <P><a href="/client/{{this._id}}">{{this.first}} {{this.last}} Info and Updates</a></p>
         {{else}}
             <p>No clients in the database.</p>

@@ -4,6 +4,10 @@
 
 <div class="client-info">
 
+    <h2>PROFILE</h2>
+
+    <P>{{client.profile}}</P>
+
     <h2>First Name</h2>
 
     <p>{{client.first}}</p>
@@ -13,36 +17,37 @@
     <p>{{client.last}}</p>
 
     <h2>Sex</h2>
-<div class="sexinfo">
-    {{#if client.sex}}
-        <p>{{client.first}} is female</p>
-    {{else}}
-        <p>{{client.first}} is male</p>
-    {{/if}}
-</div>
-    <h2>Height (Feet) </h2>
 
-    <p>{{client.height}}</p>
+    {{#if client.sex}}
+        <p id="clientpara">{{client.first}} is female</p>
+    {{else}}
+        <p id="clientpara">{{client.first}} is male</p>
+    {{/if}}
+
+    <h2>Height </h2>
+
+    <p id="clientpara">{{client.height}} ft</p>
 
     <h2>Weight</h2>
 
-    <p>{{client.weight}}</p>
+    <p id="clientpara">{{client.weight}} lbs</p>
 
     <h2>Heart Rate</h2>
 
-    <p>{{client.heart}}</p>
+    <p id="clientpara">{{client.heart}} bpm</p>
 
     <h2>Notes</h2>
 
     <p>{{client.notes}}</p>
 
-
 </div>
+
+
 
 <div class="dates-update">
 
     <h2>Dates Updated</h2>
-
+<p></p>
 </div>
 
 <p><a href="/auth"><input class="home_button" type="submit" value="H  O  M  E  "></a>
@@ -55,3 +60,5 @@
 
 
 <script src="/javascripts/check.js"></script>  <!-- Javascript file for message box -->
+
+    <script src="/javascripts/modals.js"></script>  <!-- Javascript file for modal allowing client profile modififications -->

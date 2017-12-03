@@ -11,9 +11,11 @@ body {
   margin-left: 392px;
 }
 
-.sexinfo {
+
+#clientpara {
   margin-left: 385px;
 }
+
 .headlines {
   margin-left: 335px;
 }
@@ -118,7 +120,7 @@ h2 {
   box-shadow: 0 1px black;
 }
 
-.login_button, .signup_button, .submit_button {
+.login_button, .signup_button, .submit_button, .addtask_button {
   background-color: #830993;
   color: white;
   font-family: Tahoma;
@@ -202,7 +204,6 @@ h2 {
   margin-left: 10px;
 }
 
-
 .button {
   font-family: Tahoma;
   display: inline-block;
@@ -217,9 +218,7 @@ h2 {
   border:  2px solid #19f3f3;
   border-radius: 3px;
   box-shadow: 0 1px black;
-
 }
-
 
 a:visited {
   color: #f006d4;
@@ -227,7 +226,7 @@ a:visited {
   border: 0 none;
 }
 .button:hover, .submit_button:hover, .delete_button:hover, .logout_button:hover, .home_button:hover, .login_button:hover,
-.signup_button:hover, .todo_button:hover, .completed_button:hover{
+.signup_button:hover, .todo_button:hover, .completed_button:hover, .addtask_button:hover{
   background-color: #19f3f3;
   color: white;
   -webkit-animation: bounce .3s infinite alternate;
@@ -245,9 +244,8 @@ a:visited {
   to { transform: scale(1.2); }
 }
 
-
 .button:active, .submit_button:active, .delete_button:active, .logout_button:active, .home_button:active, .login_button:active,
-.signup_button:active, .todo_button:active, .completed_button:active{
+.signup_button:active, .todo_button:active, .completed_button:active, .addtask_button:active{
   background-color: #19f3f3;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
@@ -257,8 +255,8 @@ a:visited {
   width: 20px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #474747;
-  border-left: 1px solid #474747;
+  background-color: black;
+  border-left: 1px solid black;
 
 }
 ::-webkit-scrollbar-thumb {
@@ -277,6 +275,45 @@ a:visited {
 html, body {
   max-width: 100%;
   overflow-x: hidden;
+}
+
+
+/* Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: crosshair;
 }
 
 

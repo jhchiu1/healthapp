@@ -21,7 +21,7 @@ router.use(isLoggedIn);
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    Client.find().select( { name: 1, description : 1 } ).sort( { name: 1 } )
+    Client.find().select( { name: 1, profile : 1 } ).sort( { name: 1 } )
         .then( ( docs ) => {
         console.log(docs);
     res.render('index', { title: "All Clients", client: docs });
@@ -30,6 +30,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
+/* POST to delete 1 client. */
 router.post('/delete', function(req, res, next){    // Delete button added
 
     Client.deleteOne( { _id : req.body._id } )
@@ -49,6 +50,21 @@ router.post('/delete', function(req, res, next){    // Delete button added
 });
 });
 
+/* POST modify 1 client. */
+router.post('/modClient', function(req, res, next) {  // Modify button
+    Client.findOneAndUpdate( {_id: req.body._id}, {$set: {profile : req.body.profile}} )  // Modify profile
+        .then((modifiedClient) => {
+            if (modifiedClient) {   // Name of the document prior to update
+                res.redirect('/')  // Redirect to home after updated
+            } else {
+                // 404 error if update cannot be made
+                res.status(404).send("Error modifying this client");
+            }
+        }).catch((err) => {
+        next(err);
+    })
+
+});
 
 // POST to create new client
 router.post('/addClient', function(req, res, next) {
