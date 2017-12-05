@@ -34,12 +34,12 @@ var clientSchema = new mongoose.Schema({
         type: Number,
         min: [5, 'Should be at least 5 years old'],
         max: [125, 'Should not be more than 125 years old.']
-    },
+    },      // At least 5 years old, no more than 125 years old.
     height: {
         type: Number,
         min: [3, 'Should be at least 3 feet'],
         max: [10, 'Should not be more than 10 feet.']
-    },    // At least 24 inches, no more than 150 inches.
+    },    // At least 3 ft, no more than 10 ft.
     weight: {
         type: Number,
         min: [50, 'Should be at least 50 lbs.'],
@@ -51,10 +51,7 @@ var clientSchema = new mongoose.Schema({
         max: [250, 'Should not be more than 250 bpm.']
     },    // At least 30 bpm, no more than 250 bpm
     notes: String,
-    //datesUpdate: {type: Date, default: Date.now},
-
-    datesUpdate: [ {
-        type: Date,
+    datesUpdate: {type: Date, default: Date.now,
         required: true,
         default: Date.now,
         validate: {
@@ -64,7 +61,7 @@ var clientSchema = new mongoose.Schema({
             },
             message: 'Date must be a valid date. Date must be now or in the past.'
         }
-    } ],  // An array of dates when client record was updated. Must be now, or in the past
+    }  // An array of dates when client record was updated. Must be now, or in the past
 });
 
 var Client = mongoose.model('Client', clientSchema);
