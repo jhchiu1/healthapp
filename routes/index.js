@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Client = require('../models/client');
+var Task = require('../models/task');
+
 
 /* Middleware, to verify if the user is authenticated */
 function isLoggedIn(req, res, next) {
@@ -21,7 +23,7 @@ router.use(isLoggedIn);
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    Client.find().select( { name: 1, description : 1 } ).sort( { name: 1 } )
+    Client.find().select( { first: 1, last: 1, description : 1 } ).sort( { first: 1 } )
         .then( ( docs ) => {
             console.log(docs);
             res.render('index', { title: "All Clients", clients: docs });
@@ -129,5 +131,24 @@ router.get('/client/:_id', function(req, res, next) {
         });
 });
 
+
+
+ // GET info about 1 client
+ router.get('/client/:_id/tasklist', function(req, res, next) {
+
+     Task.find( { client :  req.params._id})
+         .then( (docs) => {
+         if (docs) {
+             res.render('tasks', { task : docs });
+
+         } else {
+             res.status(404);
+     next(Error("Client not found"));
+ }
+ })
+ .catch( (err) => {
+         next(err);
+ });
+ });
 
 module.exports = router;
