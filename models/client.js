@@ -27,8 +27,6 @@ var clientSchema = new mongoose.Schema({
             message: '{VALUE} is not valid, client LAST name must be at least 2 letters'
         }
     },
-    first: String,
-    last: String,
     sex: {type: String, enum: ['Male', 'Female']},
     age: {
         type: Number,
@@ -51,7 +49,7 @@ var clientSchema = new mongoose.Schema({
         max: [250, 'Should not be more than 250 bpm.']
     },    // At least 30 bpm, no more than 250 bpm
     notes: String,
-    datesUpdate: {type: Date, default: Date.now,
+    datesUpdate: {type: Date,
         required: true,
         default: Date.now,
         validate: {

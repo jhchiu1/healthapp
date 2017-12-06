@@ -39,7 +39,7 @@ router.param('id', function(req, res, next, id){   // Fetch specific user record
 
 router.get('/:id', function(req, res){
 
-    res.render('client', { user : req.user })
+    res.render('user', { user : req.user })
 
 });
 

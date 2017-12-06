@@ -1,6 +1,6 @@
 <h4>Add / Update client profile. . .</h4>
-
-<form method="POST" action="/addClient" id="addClientform">
+<div class="new-client">
+<form method="POST" action="/addClient">
     <p>First Name <input name="first" maxlength="20" required /> <br>
     <p>Last Name <input name="last" maxlength="20" required /></p>
     <p>Sex <input name="sex" type="text" list="sexoptions"/>
@@ -10,19 +10,13 @@
     <p>Height <input type="number" min="3" max="10" name="height"/> ft</p>
     <p>Weight <input type="number" min="50" max="700" name="weight"/> lbs</p>
     <p>Heart Rate <input type="number" min="30" max="250" name="heart"/> bpm</p>
-    <p>Notes
+    <p>Notes<br>
         <textarea name="notes" rows="5" cols="30"></textarea></p>
-    <p>Date Updated <input name="datesUpdate" /></p>
+    <p>Date Updated <input name="date" type="date" /></p>
+    <input type="hidden"name="_id" value="{{client._id}}">
     <br><input class="submit_button" type="submit" value="S  U  B  M  I  T  ">
 </form>
-</div>
 
-<div class="new-update-form">
-    <form method="POST" action="/addUpdate">
-        Update: <input type="date" name="date">
-        <input type="hidden"name="_id" value="{{client._id}}">
-        <input class="submit_button" type="submit" value="Submit">
-    </form>
 
 <div class='flash-errors'>
     {{#if messages}}
@@ -41,7 +35,7 @@
 </div>
 
 
-<p><a href="/tasks/task/add"><input class="todo_button" type="submit" value="TO DO TASKS"></a>
+<p><a href="/tasks/task"><input class="todo_button" type="submit" value="TO DO TASKS"></a>
 
     <a href="/tasks/tasks_completed/tasklist"><input class="completed_button" type="submit" value="COMPLETED TASKS"></a>
 
@@ -50,9 +44,7 @@
     <a href="/logout"><input class="logout_button" type="submit" value="LOGOUT"></a>
 
 <div class='flash-errors'>
-    {{#if messages}}
-        <p class="error-message">{{messages.error}}</p>
-    {{/if}}
+
 </div>
 
 <div class="client-name-list">

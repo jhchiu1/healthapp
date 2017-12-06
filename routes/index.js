@@ -21,43 +21,88 @@ router.use(isLoggedIn);
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    Client.find().select( { name: 1, profile : 1 } ).sort( { name: 1 } )
+    Client.find().select( { name: 1, description : 1 } ).sort( { name: 1 } )
         .then( ( docs ) => {
-        console.log(docs);
-    res.render('index', { title: "All Clients", client: docs });
-} ).catch ((err) => {
+            console.log(docs);
+            res.render('index', { title: "All Clients", clients: docs });
+        } ).catch ((err) => {
         next(err)
     });
 });
 
-/* POST to delete 1 client. */
-router.post('/delete', function(req, res, next){    // Delete button added
+
+/* POST to create new client */
+router.post('/addClient', function(req, res, next) {
+
+    // Use form data to make a new client, save to DB
+    var client = Client(req.body);
+
+    // Form data to match schema
+
+    client.sex = {
+        first: req.body.first,
+        last: req.body.last,
+        sex: req.body.sex,
+        age: req.body.age,
+        height: req.body.height,
+        weight: req.body.weight,
+        heart: req.body.heart,
+        notes: req.body.notes
+    }
+
+    client.save()
+        .then( (doc) => {
+            //console.log(doc);
+            res.redirect('/')
+        })
+        .catch( (err) => {
+
+            if (err.name === 'ValidationError') {
+                // Check for validation errors
+
+                req.flash('error', err.message);
+                res.redirect('/');
+            }
+
+            else {
+                // Not either of these? Pass to generic error handler to display 500 error
+                next(err);
+            }
+        });
+});
+
+router.post('/delete', function(req, res, next){    //Delete button is added here
 
     Client.deleteOne( { _id : req.body._id } )
         .then( (result) => {
 
-        if (result.deletedCount === 1) {
-        res.redirect('/');
+            if (result.deletedCount === 1) {
+                res.redirect('/');
 
-    } else {
-        // The client was not found. Report 404 error.
-        res.status(404).send('Error deleting client: not found');
-    }
-})
-.catch((err) => {
-
-        next(err);   // Will handle invalid ObjectIDs or DB errors.
-});
-});
-
-/* POST modify 1 client. */
-router.post('/modClient', function(req, res, next) {  // Modify button
-    Client.findOneAndUpdate( {_id: req.body._id}, {$set: {profile : req.body.profile}} )  // Modify profile
-        .then((modifiedClient) => {
-            if (modifiedClient) {   // Name of the document prior to update
-                res.redirect('/')  // Redirect to home after updated
             } else {
-                // 404 error if update cannot be made
+                // The task was not found. Report 404 error.
+                res.status(404).send('Error deleting client: not found');
+            }
+        })
+        .catch((err) => {
+
+            next(err);   // Will handle invalid ObjectIDs or DB errors.
+        });
+
+});
+
+
+router.post('/modClient', function(req, res, next) {
+    console.log(req.body)  //New route for the modify button
+    Client.findOneAndUpdate( {_id: req.body._id}, {$set: {first: req.body.first, last:req.body.last,
+        sex: req.body.sex, age: req.body.age, height: req.body.height, weight: req.body.weight,
+    heart: req.body.heart, notes: req.body.notes }})
+
+        .then((modifiedClient) => {
+            if (modifiedClient) {   // Name of the document before the update
+                res.redirect('/')  // After the update, redirect to home
+            } else {
+                // if it cannot update the task, get a 404 error
                 res.status(404).send("Error modifying this client");
             }
         }).catch((err) => {
@@ -66,82 +111,22 @@ router.post('/modClient', function(req, res, next) {  // Modify button
 
 });
 
-// POST to create new client
-router.post('/addClient', function(req, res, next) {
-    // Use form data to create new client save to DB
-    var client = Client(req.body);
-    // Form data as key value pairs
-    client.nest = {
-        location: req.body.nestLocation,
-        materials: req.body.nestMaterials
-    };
-    client.save()
-        .then ( (doc) => {
-        console.log(doc);
-    res.redirect('/')
-})
-.catch( (err) => {
-        if (err.name === 'ValidationError') {
-        req.flash('error', err.message);
-        res.redirect('/');
-    }
-    // else if (err.code === 11000) {
-    //   req.flash('error', req.body.name + ' is already in the database.')
-    //   res.redirect('/');
-    // }
-else {
-        next(err);
-    }
-});
-});
-
 // GET info about 1 client
 router.get('/client/:_id', function(req, res, next) {
 
     Client.findOne( { _id:  req.params._id})
         .then( (doc) => {
-        if (doc) {
-            res.render('client', { client: doc });
+            if (doc) {
+                res.render('client', { client: doc });
 
-        } else {
-            res.status(404);
-    next(Error("Client not found"));
-}
-})
-.catch( (err) => {
-        next(err);
-});
-});
-
-// POST to add new update for client
-router.post('/addUpdate', function(req, res, next){
-
-    // Push new date onto datesSeen array and then sort in date order.
-    Client.findOneAndUpdate( {_id : req.body._id}, { $push : { datesSeen : { $each: [req.body.date], $sort: 1} } }, {runValidators : true})
-        .then( (doc) => {
-        if (doc) {
-            res.redirect('/client/' + req.body._id);   // Redirect to this client's info page
-        }
-        else {
-            res.status(404);  next(Error("Attempt to add update failed, client not in database"))
-}
-})
-.catch( (err) => {
-
-        console.log(err);
-
-    if (err.name === 'CastError') {
-        req.flash('error', 'Date must be in a valid date format');
-        res.redirect('/client/' + req.body._id);
-    }
-    else if (err.name === 'ValidationError') {
-        req.flash('error', err.message);
-        res.redirect('/client/' + req.body._id);
-    }
-    else {
-        next(err);
-    }
-});
+            } else {
+                res.status(404);
+                next(Error("Client not found"));
+            }
+        })
+        .catch( (err) => {
+            next(err);
+        });
 });
 
 
