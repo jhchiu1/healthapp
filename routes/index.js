@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var Client = require('../models/client');
+var Task = require('../models/task');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    Client.find().select( { name: 1, description : 1 } ).sort( { name: 1 } )
+    Client.find().select( { first: 1, last: 1, description : 1 } ).sort( { first: 1 } )
         .then( ( docs ) => {
         console.log(docs);
-    res.render('index', { title: "All Clients", client: docs });
+    res.render('index', { title: "All Clients", clients : docs });
 } ).catch ((err) => {
         next(err)
     });
@@ -39,10 +41,8 @@ router.post('/addClient', function(req, res, next) {
     // Use form data to create new client save to DB
     var client = Client(req.body);
     // Form data as key value pairs
-    client.nest = {
-        location: req.body.nestLocation,
-        materials: req.body.nestMaterials
-    };
+
+
     client.save()
         .then ( (doc) => {
         console.log(doc);
@@ -70,6 +70,25 @@ router.get('/client/:_id', function(req, res, next) {
         .then( (doc) => {
         if (doc) {
             res.render('client', { client: doc });
+
+        } else {
+            res.status(404);
+    next(Error("Client not found"));
+}
+})
+.catch( (err) => {
+        next(err);
+});
+});
+
+
+// GET info about 1 client
+router.get('/client/:_id/tasklist', function(req, res, next) {
+
+    Task.find( { client :  req.params._id})
+        .then( (docs) => {
+        if (docs) {
+            res.render('tasks', { task : docs });
 
         } else {
             res.status(404);

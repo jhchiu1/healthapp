@@ -17,39 +17,24 @@ function isLoggedIn(req, res, next) {
 /* Apply this middleware to every route in the file, so don't need to
 specify it for every router */
 
-router.use(isLoggedIn);
+//router.use(isLoggedIn);
 
 
-/* Since this file is mounted at /users this route is actually accessible at /users/
+/* Since this file is mounted at /client this route is actually accessible at /client/
 */
-router.get('/', isLoggedIn, function(req, res, next){
+router.get('/:id', function(req, res, next){
       res.redirect('/users/' + req.user._id);
+
+      // Retrieve specific user record
+       User.findById(id, function(err, doc){
+           if (err) { next(err); }
+           else
+           {
+               res.render('client', { user : doc })
+           }
+       });
   });
-
-router.param('id', function(req, res, next, id){   // Fetch specific user record
-   // Retrieve specific user record
-    User.findById(id, function(err, doc){
-        if (err) { next(err); }
-        else
-        {
-            req.user = doc;  // Add user to req object, following route can use it
-            next();
-        }
-    });
-});
-
-router.get('/:id', function(req, res){
-
-  // The param route does this for you
-
-      // User.find({_id: req.params.id}, function(err, docs){
-    //     if(err) res.json(err);
-    //     else    res.render('show', {user: docs[0]});
-    // });
-
-  res.render('client', { user : req.user })
-
-});
+  
 
 
 module.exports = router;
