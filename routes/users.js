@@ -16,12 +16,12 @@ function isLoggedIn(req, res, next) {
 /* Apply this middleware to every route in the file, so don't need to
 specify it for every router */
 
-router.use(isLoggedIn);
+//router.use(isLoggedIn);
 
 
 /* Since this file is mounted at /users this route is actually accessible at /users/
 */
-router.get('/', isLoggedIn, function(req, res, next){
+router.get('/', function(req, res, next){
     res.redirect('/users/' + req.user._id);
 });
 
