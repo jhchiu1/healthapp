@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 
 
 /* POST to create new client */
-router.post('/addClient', function(req, res, next) {
+router.post('/add', function(req, res, next) {
 
     // Use form data to make a new client, save to DB
     var client = Client(req.body);
