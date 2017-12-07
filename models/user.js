@@ -1,21 +1,24 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
-var userSchema = new mongoose.Schema({
-    local: {
-        username: String,
-        password: String
-    }
-});
-
-var uniqueValidator = require('mongoose-unique-validator');
-var User = mongoose.model('User', userSchema);
-userSchema.plugin(uniqueValidator);
+// var userSchema = new mongoose.Schema({
+//     local: {
+//         username: String,
+//         password: String
+//     }
+// });
 
 
 /* Information about a client, and dates this client's record was updated */
 
 var userSchema = new mongoose.Schema({
+
+  local: {
+      username: String,
+      password: String
+  },
+
+
     first: {
         type: String, required: [true, 'User FIRST name is required.'],
         unique: true,
@@ -73,6 +76,23 @@ var userSchema = new mongoose.Schema({
         }
     }  // An array of dates when client record was updated. Must be now, or in the past
 });
+
+
+userSchema.methods.generateHash = function(password) {
+  // Create salted hash of plaintext password
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+}
+
+userSchema.methods.validPassword = function(password) {
+  // Compare password to stored password
+  return bcrypt.compareSync(password, this.local.password);
+}
+
+
+
+var uniqueValidator = require('mongoose-unique-validator');
+var User = mongoose.model('User', userSchema);
+userSchema.plugin(uniqueValidator);
 
 
 module.exports = User;
