@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
 
 
 /* POST to create new client */
-router.post('/add', function(req, res, next) {
+router.post('/user/add', function(req, res, next) {
 
     // Use form data to make a new client, save to DB
     var user = User(req.body);
@@ -73,7 +73,7 @@ router.post('/add', function(req, res, next) {
         });
 });
 
-router.post('/delete', function(req, res, next){    //Delete button is added here
+router.post('/user/_id/delete', function(req, res, next){    //Delete button is added here
 
     User.deleteOne( { _id : req.body._id } )
         .then( (result) => {
@@ -114,7 +114,7 @@ router.post('/modUser', function(req, res, next) {
 });
 
 // GET info about 1 client
-router.get('/user/:_id', function(req, res, next) {
+router.get('/user/_id', function(req, res, next) {
 
     User.findOne( { _id:  req.params._id})
         .then( (doc) => {
