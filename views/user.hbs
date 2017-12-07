@@ -1,0 +1,110 @@
+<a href="/auth"><h1>[ HealthApp &#9829; ]</h1></a><p>
+
+<h1>{{user.first}} {{user.last}}</h1>
+
+<div class="user-info">
+
+    <h2>PROFILE</h2>
+
+    <p>{{user.profile}}</p>
+
+    <h2>First Name</h2>
+
+    <p>{{user.first}}</p>
+
+    <h2>Last Name</h2>
+
+    <p>{{user.last}}</p>
+
+    <h2>Sex</h2>
+
+    {{#if usiert.sex}}
+        <p id="userpara">{{user.first}} is female</p>
+    {{else}}
+        <p id="userpara">{{user.first}} is male</p>
+    {{/if}}
+
+    <h2>Height </h2>
+
+    <p id="userpara">{{user.height}} ft</p>
+
+    <h2>Weight</h2>
+
+    <p id="userpara">{{user.weight}} lbs</p>
+
+    <h2>Heart Rate</h2>
+
+    <p id="userpara">{{user.heart}} bpm</p>
+
+    <h2>Notes</h2>
+
+    <p>{{user.notes}}</p>
+
+</div>
+
+
+<div class="dates-seen">
+
+    <div class="new-user-form">
+
+        <form method="POST" action="/addUser">
+            Update: <input type="date" name="date">
+            <input type="hidden" name="_id" value="{{user._id}}">
+            <input type="submit" value="Submit">
+        </form>
+
+        <div class='flash-errors'>
+            {{#if messages}}
+                <p class="error-message">{{messages.error}}</p>
+            {{/if}}
+        </div>
+
+    </div>
+
+        <button id="myBtn">Modify USER Information</button>
+
+        <!-- Modal form added here.  Used W3 schools tutorial for modal. -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <form method="POST" action="/modUser">
+                    <p>First Name <input name="first" maxlength="20" required value="{{user.first}}"></p><br>
+                <p>Last Name <input name="last" maxlength="20" required value="{{user.last}}"></p>
+                <p>Sex <input name="sex" type="text" list="sexoptions"></p><br>
+                    <datalist id="sexoptions"><option value="Male" label="Male" required value="{{user.sex}}"></option>
+                        <option value="Female" label="Female" required value="{{user.sex}}"></option></datalist></p>
+                <p>Age <input type="number" min="5" max="125" name="age" required value="{{user.age}}"> years old</p>
+                <p>Height <input type="number" min="3" max="10" name="height" required value="{{user.height}}"> ft</p>
+                <p>Weight <input type="number" min="50" max="700" name="weight" required value="{{user.weight}}"> lbs</p>
+                <p>Heart Rate <input type="number" min="30" max="250" name="heart" required value="{{user.heart}}"> bpm</p>
+                <p>Notes<br>
+                    <textarea name="notes" rows="5" cols="30" required value="{{user.notes}}"></textarea></p>
+                <p>Date Updated <input name="date" type="date" required value="{{user.datesUpdate}}"></p>
+                <input type="hidden"name="_id" required value="{{user._id}}">
+                <br><input class="submit_button" type="submit" value="S  U  B  M  I  T  ">
+                </form>
+            </div>
+
+        </div>
+        <br><br>
+
+    </div>
+
+</div>
+
+
+<p><a href="/auth"><input class="home_button" type="submit" value="H  O  M  E  "></a>
+
+    <a href="/auth/logout"><input class="logout_button" type="submit" value="LOGOUT"></a>
+
+<p><a href="/user/id/tasklist"><input class="todo_button" type="submit" value="TODO LIST"></a>
+
+ <!--   <a href="/tasks/tasks_completed/tasklist"><input class="completed_button" type="submit" value="COMPLETED TASKS"></a>-->
+
+
+<script src="/javascripts/check.js"></script>  <!-- Javascript file for message box -->
+
+    <script src="/javascripts/modals.js"></script>  <!-- Javascript file for modal allowing client profile modififications -->

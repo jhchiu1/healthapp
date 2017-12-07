@@ -37,7 +37,7 @@ router.get('/task', function(req, res, next) {
 
 /* GET details about one task */
 
-router.get('/task/:_id', function(req, res, next) {
+router.get('/task/_id', function(req, res, next) {
 
     /* This route matches URLs in the format task/anything
     Note the format of the route path is  /task/:_id
@@ -85,12 +85,12 @@ router.get('/completed', function(req, res, next){
 
 
 /* POST new task */
-router.post('/add', function(req, res, next){
+router.post('/user/_id/tasklist/add', function(req, res, next){
 
     if (!req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
         req.flash('error', 'please enter a task');
-        res.redirect('/add');
+        res.redirect('/user/_id/tasklist/add');
     }
 
     else {
@@ -101,7 +101,7 @@ router.post('/add', function(req, res, next){
         new Task( { creator: req.user._id, text: req.body.text, completed: false} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
-                res.redirect('/add');
+                res.redirect('/user/_id/tasklist/add');
             })
             .catch((err) => {
                 next(err);   // most likely to be a database error.
@@ -133,7 +133,7 @@ router.post('/done', function(req, res, next) {
 /* POST all tasks done */
 router.post('/alldone', function(req, res, next) {
 
-    Task.updateMany( { creator: req.user._id, completed : false } , { $set : { completed : true} } )
+    Task.updateMany( { user: req.user._id, completed : false } , { $set : { completed : true} } )
         .then( (result) => {
             console.log("How many documents were modified? ", result.n);
             req.flash('info', 'All tasks marked as done!');

@@ -25,7 +25,7 @@ router.get('/', isLoggedIn, function(req, res, next){
     res.redirect('/users/' + req.user._id);
 });
 
-router.param('id', function(req, res, next, id){   // Fetch specific user record
+router.param('_id', function(req, res, next, id){   // Fetch specific user record
     // Retrieve specific user record
     User.findById(id, function(err, doc){
         if (err) { next(err); }

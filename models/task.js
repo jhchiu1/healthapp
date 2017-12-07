@@ -13,7 +13,7 @@ var taskSchema = new Schema( {
     Useful if we need to access info about the user from the task. */
 
     // Creator field added
-    creator: { type: ObjectId, ref: 'User'}
+    user: { type: ObjectId, ref: 'User'}
 });
 
 // Compile taskSchema into Mongoose model object
