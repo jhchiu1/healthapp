@@ -22,7 +22,7 @@ router.use(isLoggedIn);
 
 
 /* GET home page with all incomplete tasks */
-router.get('/task', function(req, res, next) {
+router.get('/user/:_id/tasklist', function(req, res, next) {
 
     Task.find( { creator: req.user._id, completed: false})
         .then( (docs) => {
@@ -37,7 +37,7 @@ router.get('/task', function(req, res, next) {
 
 /* GET details about one task */
 
-router.get('/task/_id', function(req, res, next) {
+router.get('/task/:_id', function(req, res, next) {
 
     /* This route matches URLs in the format task/anything
     Note the format of the route path is  /task/:_id
@@ -55,7 +55,7 @@ router.get('/task/_id', function(req, res, next) {
             if (!task) {
                 res.status(404).send('Task not found');
             }
-            else if ( req.user._id.equals(task.creator)) {
+            else if ( req.user._id.equals(task.user)) {
                 // Does this task belong to this user?
                 res.render('task', {title: 'Task', task: task});
             }
@@ -85,7 +85,7 @@ router.get('/completed', function(req, res, next){
 
 
 /* POST new task */
-router.post('/user/_id/tasklist/add', function(req, res, next){
+router.post('/user/:_id/tasklist/add', function(req, res, next){
 
     if (!req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
@@ -96,9 +96,9 @@ router.post('/user/_id/tasklist/add', function(req, res, next){
     else {
 
         // Insert into database. New tasks are assumed to be not completed.
-
+        var dateCreated = new Date();
         // Create a new Task, an instance of the Task schema, and call save()
-        new Task( { creator: req.user._id, text: req.body.text, completed: false} ).save()
+        new Task( { user: req.user._id, text: req.body.text, completed: false, dateCreated: new Date()} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
                 res.redirect('/user/_id/tasklist/add');
@@ -115,7 +115,7 @@ router.post('/done', function(req, res, next) {
 
     // Is this is the user's task?
 
-    Task.findOneAndUpdate( { creator: req.user._id, _id: req.body._id}, {$set: {completed: true}} )
+    Task.findOneAndUpdate( { user: req.user._id, _id: req.body._id}, {$set: {completed: true, dateCompleted: new Date()}} )
         .then((updatedTask) => {
             if (updatedTask) {   // updatedTask is the document *before* the update
                 res.redirect('/')  // One thing was updated. Redirect to home
@@ -126,14 +126,13 @@ router.post('/done', function(req, res, next) {
         }).catch((err) => {
         next(err);
     })
-
 });
 
 
 /* POST all tasks done */
 router.post('/alldone', function(req, res, next) {
 
-    Task.updateMany( { user: req.user._id, completed : false } , { $set : { completed : true} } )
+    Task.updateMany( { user: req.user._id, completed : false } , { $set : { completed : true, dateCompleted: new Date()} } )
         .then( (result) => {
             console.log("How many documents were modified? ", result.n);
             req.flash('info', 'All tasks marked as done!');
@@ -166,17 +165,4 @@ router.post('/delete', function(req, res, next){
 
 });
 
-/* POST all tasks as deleted that belong to a specific user*/
-router.post('/alldelete', function(req, res, next){
-
-        Tasks.deleteMany( { creator: req.user._id, _id : req.body._id, completed : true })
-            .then( (result) => {
-                console.log("How many documents were deleted? ", result.n);
-                req.flash('info', 'All completed tasks deleted!');
-                res.redirect('/');
-            })
-            .catch( (err) => {
-                next(err);
-            })
-    });
 module.exports = router;

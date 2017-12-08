@@ -11,12 +11,11 @@ body {
   margin-left: 392px;
 }
 
-
 #userpara {
   margin-left: 385px;
 }
 
-.headlines, {
+.headlines {
   margin-left: 335px;
 }
 
@@ -28,6 +27,29 @@ body {
   text-align: center;
 }
 
+.clientprof {
+  margin-left: 235px;
+}
+
+.modprof {
+  margin-left: -150px;
+}
+
+.userprof {
+  margin-left: 210px;
+}
+
+.new-user {
+  margin-left: 565px;
+}
+
+.user-name-list {
+  margin-left: 70px;
+}
+.usersummary {
+  margin-left: 180px;
+  text-decoration: underline;
+}
 a {
   color: #ccffcc;
   text-decoration: none;
@@ -104,7 +126,7 @@ h2 {
   -webkit-text-fill-color: transparent;
 }
 
-.delete_button {
+.deletetask_button {
   background-color: pink;
   color: white;
   font-family: Tahoma;
@@ -120,7 +142,24 @@ h2 {
   box-shadow: 0 1px black;
 }
 
-.login_button, .signup_button, .submit_button, .addtask_button {
+.deleteuser_button {
+  background-color: #B924A3;
+  color: white;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 15px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+  margin-left: 565px;
+}
+
+.login_button, .signup_button, .submit_button, .addtask_button{
   background-color: #830993;
   color: white;
   font-family: Tahoma;
@@ -136,7 +175,24 @@ h2 {
   box-shadow: 0 1px black;
 }
 
-.todo_button {
+.tasklist_button {
+  background-color: purple;
+  color: white;
+  font-family: Tahoma;
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 15px;
+  cursor: crosshair;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border:  2px solid #19f3f3;
+  border-radius: 3px;
+  box-shadow: 0 1px black;
+  margin-left: 565px;
+}
+
+.add_button {
   background-color: #B924A3  ;
   color: white;
   font-family: Tahoma;
@@ -167,10 +223,10 @@ h2 {
   border:  2px solid #19f3f3;
   border-radius: 3px;
   box-shadow: 0 1px black;
-  margin-left: 20px;
+  margin-left: 65px;
 }
 
-.home_button {
+.home_button{
   background-color: #7DF5A6;
   color: purple;
   font-family: Tahoma;
@@ -184,7 +240,7 @@ h2 {
   border:  2px solid #19f3f3;
   border-radius: 3px;
   box-shadow: 0 1px black;
-  margin-left: 335px;
+  margin-left: 565px;
 }
 
 .completed_button {
@@ -226,7 +282,8 @@ a:visited {
   border: 0 none;
 }
 .button:hover, .submit_button:hover, .delete_button:hover, .logout_button:hover, .home_button:hover, .login_button:hover,
-.signup_button:hover, .todo_button:hover, .completed_button:hover, .addtask_button:hover{
+.signup_button:hover, .completed_button:hover, .add_button:hover, .tasklist_button:hover, .modify_button:hover, .addtask_button:hover,
+.deletetask_button:hover, .deleteuser_button:hover{
   background-color: #19f3f3;
   color: white;
   -webkit-animation: bounce .3s infinite alternate;
@@ -245,7 +302,8 @@ a:visited {
 }
 
 .button:active, .submit_button:active, .delete_button:active, .logout_button:active, .home_button:active, .login_button:active,
-.signup_button:active, .todo_button:active, .completed_button:active, .addtask_button:active{
+.signup_button:active, .completed_button:active, .add_button:active,.tasklist_button:active, .modify_button:active, .addtask_button:active,
+.delete_taskbutton:active, .deleteuser_button:active{
   background-color: #19f3f3;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
@@ -294,16 +352,16 @@ html, body {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #0B1063;
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  border: 1px solid #ccccff;
+  width: 50%;
 }
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: #ccccff;
   float: right;
   font-size: 28px;
   font-weight: bold;

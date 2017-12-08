@@ -23,10 +23,10 @@ router.use(isLoggedIn);
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    User.find().select( { first: 1, last: 1, description : 1 } ).sort( { first: 1 } )
+    User.find().select( { first: 1, last: 1, description : 1 } ).sort( { last: 1 } )
         .then( ( docs ) => {
             console.log(docs);
-            res.render('index', { title: "All Users", users: docs });
+            res.render('index', { title: "Client List", user: docs });
         } ).catch ((err) => {
         next(err)
     });
@@ -41,7 +41,7 @@ router.post('/user/add', function(req, res, next) {
 
     // Form data to match schema
 
-    user.sex = {
+    User.profile = {
         first: req.body.first,
         last: req.body.last,
         sex: req.body.sex,
@@ -50,11 +50,11 @@ router.post('/user/add', function(req, res, next) {
         weight: req.body.weight,
         heart: req.body.heart,
         notes: req.body.notes
-    }
+    };
 
     user.save()
         .then( (doc) => {
-            //console.log(doc);
+            console.log(doc);
             res.redirect('/')
         })
         .catch( (err) => {
@@ -73,7 +73,7 @@ router.post('/user/add', function(req, res, next) {
         });
 });
 
-router.post('/user/_id/delete', function(req, res, next){    //Delete button is added here
+router.post('/user/:_id/delete', function(req, res, next){    //Delete button is added here
 
     User.deleteOne( { _id : req.body._id } )
         .then( (result) => {
@@ -94,9 +94,9 @@ router.post('/user/_id/delete', function(req, res, next){    //Delete button is 
 });
 
 
-router.post('/modUser', function(req, res, next) {
+router.post('/user/:_id/modUser', function(req, res, next) {
     console.log(req.body)  //New route for the modify button
-    Client.findOneAndUpdate( {_id: req.body._id}, {$set: {first: req.body.first, last:req.body.last,
+    User.findOneAndUpdate( {_id: req.body._id}, {$set: {first: req.body.first, last:req.body.last,
         sex: req.body.sex, age: req.body.age, height: req.body.height, weight: req.body.weight,
         heart: req.body.heart, notes: req.body.notes }})
 
@@ -114,12 +114,12 @@ router.post('/modUser', function(req, res, next) {
 });
 
 // GET info about 1 client
-router.get('/user/_id', function(req, res, next) {
+router.get('/user/:_id', function(req, res, next) {
 
     User.findOne( { _id:  req.params._id})
         .then( (doc) => {
             if (doc) {
-                res.render('user', { client: doc });
+                res.render('user', { user: doc });
 
             } else {
                 res.status(404);
@@ -134,7 +134,7 @@ router.get('/user/_id', function(req, res, next) {
 
 
 // GET info about 1 client
-router.get('/user/_id/tasklist', function(req, res, next) {
+router.get('/user/:_id/tasklist', function(req, res, next) {
 
     Task.find( { user :  req.params._id})
         .then( (docs) => {

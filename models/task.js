@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = mongoose.Schema.Types.ObjectId;
 
 //Define your schema: what fields will one task document have
 var taskSchema = new Schema( {
@@ -9,11 +8,6 @@ var taskSchema = new Schema( {
     dateCompleted: Date,
     completed: Boolean,
 
-    /* Reference to the user object who created this task
-    Useful if we need to access info about the user from the task. */
-
-    // Creator field added
-    user: { type: ObjectId, ref: 'User'}
 });
 
 // Compile taskSchema into Mongoose model object

@@ -1,20 +1,18 @@
 <a href="/auth"><h1>[ HealthApp &#9829; ]</h1></a><p>
 
 <h1>{{user.first}} {{user.last}}</h1>
-
-<div class="user-info">
-
+<div class="userprof">
     <h2>PROFILE</h2>
 
-    <p>{{user.profile}}</p>
+    <p id="userpara">{{user.profile}}</p>
 
     <h2>First Name</h2>
 
-    <p>{{user.first}}</p>
+    <p id="userpara">{{user.first}}</p>
 
     <h2>Last Name</h2>
 
-    <p>{{user.last}}</p>
+    <p id="userpara">{{user.last}}</p>
 
     <h2>Sex</h2>
 
@@ -38,28 +36,9 @@
 
     <h2>Notes</h2>
 
-    <p>{{user.notes}}</p>
-
+    <p id="userpara">{{user.notes}}</p>
 </div>
 
-
-<div class="dates-seen">
-
-    <div class="new-user-form">
-
-        <form method="POST" action="/addUser">
-            Update: <input type="date" name="date">
-            <input type="hidden" name="_id" value="{{user._id}}">
-            <input type="submit" value="Submit">
-        </form>
-
-        <div class='flash-errors'>
-            {{#if messages}}
-                <p class="error-message">{{messages.error}}</p>
-            {{/if}}
-        </div>
-
-    </div>
 
         <button id="myBtn">Modify USER Information</button>
 
@@ -70,12 +49,15 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
 
-                <form method="POST" action="/modUser">
+                <form method="POST" action="/user/_id/modUser">
+                    <div class="modprof">
+                        <h2>Modify Client Profile</h2></div>
+                    <div class="clientprof">
                     <p>First Name <input name="first" maxlength="20" required value="{{user.first}}"></p><br>
                 <p>Last Name <input name="last" maxlength="20" required value="{{user.last}}"></p>
-                <p>Sex <input name="sex" type="text" list="sexoptions"></p><br>
-                    <datalist id="sexoptions"><option value="Male" label="Male" required value="{{user.sex}}"></option>
-                        <option value="Female" label="Female" required value="{{user.sex}}"></option></datalist></p>
+                <p>Sex <input name="sex" type="text" list="sexoptions"><br>
+                    <datalist id="sexoptions"><option value="Male" label="Male"></option>
+                        <option value="Female" label="Female"></option></datalist></p>
                 <p>Age <input type="number" min="5" max="125" name="age" required value="{{user.age}}"> years old</p>
                 <p>Height <input type="number" min="3" max="10" name="height" required value="{{user.height}}"> ft</p>
                 <p>Weight <input type="number" min="50" max="700" name="weight" required value="{{user.weight}}"> lbs</p>
@@ -85,8 +67,8 @@
                 <p>Date Updated <input name="date" type="date" required value="{{user.datesUpdate}}"></p>
                 <input type="hidden"name="_id" required value="{{user._id}}">
                 <br><input class="submit_button" type="submit" value="S  U  B  M  I  T  ">
+                    </div>
                 </form>
-            </div>
 
         </div>
         <br><br>
@@ -100,7 +82,15 @@
 
     <a href="/auth/logout"><input class="logout_button" type="submit" value="LOGOUT"></a>
 
-<p><a href="/user/id/tasklist"><input class="todo_button" type="submit" value="TODO LIST"></a>
+<p><a href="/user/_id/tasklist"><input class="tasklist_button" type="submit" value="TASKLIST"></a>
+
+<div class="delete_user">  <!-- Delete button for each client page -->
+    <form action="/user/_id/delete" method="POST" class="delete_form">   <!-- Delete button -->
+        <input type="hidden" name="_id" value="{{user._id}}">
+        <input class="deleteuser_button" type="submit" name="done" value="Delete this User">
+    </form>
+    <br>
+</div>
 
  <!--   <a href="/tasks/tasks_completed/tasklist"><input class="completed_button" type="submit" value="COMPLETED TASKS"></a>-->
 

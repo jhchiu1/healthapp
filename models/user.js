@@ -1,45 +1,19 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
-var userSchema = new mongoose.Schema({
-    local: {
-        username: String,
-        password: String
-    }
-});
-
-var uniqueValidator = require('mongoose-unique-validator');
-var User = mongoose.model('User', userSchema);
-userSchema.plugin(uniqueValidator);
-
-
 /* Information about a client, and dates this client's record was updated */
 
 var userSchema = new mongoose.Schema({
-    first: {
-        type: String, required: [true, 'User FIRST name is required.'],
-        unique: true,
-        uniqueCaseInsensitive: true,
-        validate: {
-            validator: function (n) {
-                return n.length >= 2;
-            },
-            message: '{VALUE} is not valid, user FIRST name must be at least 2 letters'
-        }
-    },             // Validation where unique client name required being at least 2 letters long.
 
-    last: {
-        type: String, required: [true, 'User LAST name is required.'],
-        unique: true,
-        uniqueCaseInsensitive: true,
-        validate: {
-            validator: function (n) {
-                return n.length >= 2;
-            },
-            message: '{VALUE} is not valid, user LAST name must be at least 2 letters'
-        }
+    local: {
+        username: String,
+        password: String
     },
-    sex: {type: String, enum: ['Male', 'Female']},
+
+    first: String,
+    last: String,
+    sex: {type: String, enum: ['Male', 'Female']
+    },
     age: {
         type: Number,
         min: [5, 'Should be at least 5 years old'],
@@ -73,6 +47,23 @@ var userSchema = new mongoose.Schema({
         }
     }  // An array of dates when client record was updated. Must be now, or in the past
 });
+
+
+userSchema.methods.generateHash = function(password) {
+    // Create salted hash of plaintext password
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+}
+
+userSchema.methods.validPassword = function(password) {
+    // Compare password to stored password
+    return bcrypt.compareSync(password, this.local.password);
+}
+
+
+
+var uniqueValidator = require('mongoose-unique-validator');
+var User = mongoose.model('User', userSchema);
+userSchema.plugin(uniqueValidator);
 
 
 module.exports = User;
