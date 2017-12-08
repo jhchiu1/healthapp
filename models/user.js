@@ -59,8 +59,6 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 }
 
-
-
 var uniqueValidator = require('mongoose-unique-validator');
 var User = mongoose.model('User', userSchema);
 userSchema.plugin(uniqueValidator);

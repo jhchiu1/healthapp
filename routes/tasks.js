@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Task = require('../models/task');
-var ObjectId = require('mongoose').mongo.ObjectID;
+var ObjectId = require('mongoose').mongo.ObjectId;
+
 
 
 /* Middleware, to verify if the user is authenticated */
@@ -24,7 +25,7 @@ router.use(isLoggedIn);
 /* GET home page with all incomplete tasks */
 router.get('/user/:_id/tasklist', function(req, res, next) {
 
-    Task.find( { creator: req.user._id, completed: false})
+    Task.find( { user: req.user._id, completed: false})
         .then( (docs) => {
             res.render('tasks', {title: 'Incomplete Tasks', tasks: docs})
         })
@@ -74,7 +75,7 @@ router.get('/task/:_id', function(req, res, next) {
 /* GET completed tasks */
 router.get('/completed', function(req, res, next){
 
-    Task.find( {creator: req.user._id, completed:true} )
+    Task.find( {user: req.user._id, completed:true} )
         .then( (docs) => {
             res.render('tasks_completed', { title: 'Completed tasks' , tasks: docs });
         }).catch( (err) => {
@@ -85,12 +86,12 @@ router.get('/completed', function(req, res, next){
 
 
 /* POST new task */
-router.post('/user/:_id/tasklist/add', function(req, res, next){
+router.post('/user/:_id/task/add', function(req, res, next){
 
     if (!req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
         req.flash('error', 'please enter a task');
-        res.redirect('/user/_id/tasklist/add');
+        res.redirect('/user/_id/task/add');
     }
 
     else {
@@ -98,10 +99,10 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
         // Insert into database. New tasks are assumed to be not completed.
         var dateCreated = new Date();
         // Create a new Task, an instance of the Task schema, and call save()
-        new Task( { user: req.user._id, text: req.body.text, completed: false, dateCreated: new Date()} ).save()
+        new Task( { task: req.user._id, text: req.body.text, completed: false, dateCreated: new Date()} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
-                res.redirect('/user/_id/tasklist/add');
+                res.redirect('/user/_id/task/add');
             })
             .catch((err) => {
                 next(err);   // most likely to be a database error.
@@ -148,7 +149,7 @@ router.post('/alldone', function(req, res, next) {
 /* POST task delete */
 router.post('/delete', function(req, res, next){
 
-    Task.deleteOne( { creator: req.user._id, _id : req.body._id } )
+    Task.deleteOne( { user: req.user._id, _id : req.body._id } )
         .then( (result) => {
 
             if (result.deletedCount === 1) {  // one task document deleted
