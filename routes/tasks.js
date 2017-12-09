@@ -86,12 +86,12 @@ router.get('/completed', function(req, res, next){
 
 
 /* POST new task */
-router.post('/user/:_id/task/add', function(req, res, next){
+router.post('/user/:_id/tasklist/add', function(req, res, next){
 
     if (!req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
         req.flash('error', 'please enter a task');
-        res.redirect('/user/_id/task/add');
+        res.redirect('/');
     }
 
     else {
@@ -102,7 +102,7 @@ router.post('/user/:_id/task/add', function(req, res, next){
         new Task( { task: req.user._id, text: req.body.text, completed: false, dateCreated: new Date()} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
-                res.redirect('/user/_id/task/add');
+                res.redirect('/');
             })
             .catch((err) => {
                 next(err);   // most likely to be a database error.

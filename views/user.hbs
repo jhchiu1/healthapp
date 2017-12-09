@@ -16,7 +16,7 @@
 
     <h2>Sex</h2>
 
-    {{#if usiert.sex}}
+    {{#if user.sex}}
         <p id="userpara">{{user.first}} is female</p>
     {{else}}
         <p id="userpara">{{user.first}} is male</p>
@@ -82,7 +82,7 @@
 
     <a href="/auth/logout"><input class="logout_button" type="submit" value="LOGOUT"></a>
 
-<p><a href="/user/_id/tasklist"><input class="tasklist_button" type="submit" value="TASKLIST"></a>
+<p><a href="/user/{{user._id}}/tasklist"><input class="tasklist_button" type="submit" value="TASKLIST"></a>
 
 <div class="delete_user">  <!-- Delete button for each client page -->
     <form action="/user/_id/delete" method="POST" class="delete_form">   <!-- Delete button -->
