@@ -3,9 +3,9 @@
 <h1>TASKLIST</h1>
 <div class="taskinfo">
 <div class="addtask">
-    <form method="POST" action="/user/{{user._id}}/tasklist/add" class="add_form">
+    <form method="POST" action="/user/{{user.id}}/task/tasklist/add" class="add_form">
         <input id="addtask_text" name="text" type="text" placeholder="Enter a task" required>
-        <input type="hidden" name="_id" value="{{this._id}}">
+        <input type="hidden" name="_id" value="{{user._id}}">
         <input class="addtask_button" type="submit" value="Add Task">
     </form>
 </div>
@@ -19,7 +19,7 @@
 
 <div class="tasklist">
     {{#each tasks}}
-        <p>{{@tasks}}: <a href="/user/{{user._id}}/task/tasklist/{{this._id}}">{{this.text}}{{this.dateCreated}}</a></p></a></p>
+        <p>{{@tasklist}}: <a href="/user/{{user.id}}/task/tasklist/{{this._id}}">{{this.text}}</a></p>
 
 
         <form action="/user/{{user._id}}/tasklist/done" method="POST" class="done_form">
@@ -41,6 +41,11 @@
                 <input class="all_done_button" type="submit" value="Everything is done!">
             </form>
         {{/if}}</div>
+
+
+    <div class="navigation">
+        <a href="/">To do tasks</a> <a href="/completed">Completed Tasks</a>
+    </div>
 
 </div>
 </div>

@@ -77,7 +77,7 @@ router.get('/user/:_id/tasklist/completed', function(req, res, next){
 
     Task.find( {user: req.user._id, completed:true} )
         .then( (docs) => {
-            res.render('user/:_id/tasklist/tasks_completed', { title: 'Completed tasks' , tasks: docs });
+            res.render('user/:_id/tasklist/completed', { title: 'Completed tasks' , tasks: docs });
         }).catch( (err) => {
         next(err);
     });
@@ -86,12 +86,12 @@ router.get('/user/:_id/tasklist/completed', function(req, res, next){
 
 
 /* POST new task */
-router.post('/user/:_id/tasklist/add', function(req, res, next){
+router.post('/user/:_id/task/tasklist/add', function(req, res, next){
 
-    if (!req.body || !req.body.text) {
+    if (!req.user || !req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
         req.flash('error', 'please enter a task');
-        res.redirect('/user/:_id/tasklist/add');
+        res.redirect('user/:_id/tasklist');
     }
 
     else {
@@ -99,10 +99,10 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
         // Insert into database. New tasks are assumed to be not completed.
         var dateCreated = new Date();
         // Create a new Task, an instance of the Task schema, and call save()
-        new Task( { task: req.user._id, text: req.body.text, completed: false, dateCreated: new Date()} ).save()
+        new Task( { user: req.user, task: req.user._id, text: req.body.text, completed: false, dateCreated: new Date()} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
-                res.redirect('/user/:_id/tasklist/add');
+                res.redirect('/user/:_id/tasklist');
             })
             .catch((err) => {
                 next(err);   // most likely to be a database error.

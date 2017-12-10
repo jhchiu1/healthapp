@@ -140,7 +140,7 @@ router.get('/user/:_id/tasklist', function(req, res, next) {
     Task.find( { user :  req.params._id})
         .then( (docs) => {
             if (docs) {
-                res.render('tasklist', { task : docs });
+                res.render('tasklist', { user: req.user, task : docs });
 
             } else {
                 res.status(404);
