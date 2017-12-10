@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-var User = require('../models/user');
+var Task = require('../models/task');
 
 
 /* Middleware, to verify if the user is authenticated */
@@ -119,7 +119,7 @@ router.get('/user/:_id', function(req, res, next) {
     Task.find( { user :  req.params._id})
         .then( (docs) => {
             if (docs) {
-                res.render('tasks', { task : docs });
+                res.render('user', { user : docs });
 
             } else {
                 res.status(404);
@@ -131,22 +131,5 @@ router.get('/user/:_id', function(req, res, next) {
         });
 });
 
-// GET info about 1 client
-router.get('/user/:_id/tasklist', function(req, res, next) {
-
-    Task.find( { user :  req.params._id})
-        .then( (docs) => {
-            if (docs) {
-                res.render('tasks', { task : docs });
-
-            } else {
-                res.status(404);
-                next(Error("User not found"));
-            }
-        })
-        .catch( (err) => {
-            next(err);
-        });
-});
 
 module.exports = router;
