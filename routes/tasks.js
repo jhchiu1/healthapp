@@ -27,7 +27,7 @@ router.get('/user/:_id/tasklist', function(req, res, next) {
 
     Task.find( { user: req.user._id, completed: false})
         .then( (docs) => {
-            res.render('tasks', {title: 'Incomplete Tasks', tasks: docs})
+            res.render('/user/:_id/tasklist', {title: 'Incomplete Tasks', tasks: docs})
         })
         .catch( (err) => {
             next(err);
@@ -91,7 +91,7 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
     if (!req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
         req.flash('error', 'please enter a task');
-        res.redirect('/');
+        res.redirect('/user/:_id/tasklist/add');
     }
 
     else {
@@ -102,7 +102,7 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
         new Task( { task: req.user._id, text: req.body.text, completed: false, dateCreated: new Date()} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
-                res.redirect('/');
+                res.redirect('/user/:_id/tasklist/add');
             })
             .catch((err) => {
                 next(err);   // most likely to be a database error.
@@ -137,7 +137,7 @@ router.post('/user/:_id/tasklist/alldone', function(req, res, next) {
         .then( (result) => {
             console.log("How many documents were modified? ", result.n);
             req.flash('info', 'All tasks marked as done!');
-            res.redirect('/');
+            res.redirect('/user/:_id/tasklist/alldone');
         })
         .catch( (err) => {
             next(err);
@@ -153,7 +153,7 @@ router.post('/user/:_id/tasklist/delete', function(req, res, next){
         .then( (result) => {
 
             if (result.deletedCount === 1) {  // one task document deleted
-                res.redirect('/');
+                res.redirect('/user/:_id/tasklist/delete');
 
             } else {
                 // The task was not found. Report 404 error.

@@ -73,6 +73,7 @@ router.post('/user/add', function(req, res, next) {
         });
 });
 
+/* POST to delete 1 client. */
 router.post('/user/:_id/delete', function(req, res, next){    //Delete button is added here
 
     User.deleteOne( { _id : req.body._id } )
@@ -93,12 +94,12 @@ router.post('/user/:_id/delete', function(req, res, next){    //Delete button is
 
 });
 
-
+/* POST modify 1 client. */
 router.post('/user/:_id/modUser', function(req, res, next) {
     console.log(req.body)  //New route for the modify button
     User.findOneAndUpdate( {_id: req.body._id}, {$set: {first: req.body.first, last:req.body.last,
         sex: req.body.sex, age: req.body.age, height: req.body.height, weight: req.body.weight,
-        heart: req.body.heart, notes: req.body.notes }})
+        heart: req.body.heart, notes: req.body.notes, datesUpdate: req.body.datesUpdate }})
 
         .then((modifiedUser) => {
             if (modifiedUser) {   // Name of the document before the update
@@ -133,13 +134,13 @@ router.get('/user/:_id', function(req, res, next) {
 
 
 
-// GET info about 1 client
+// GET info about 1 client, connect to their tasklist
 router.get('/user/:_id/tasklist', function(req, res, next) {
 
     Task.find( { user :  req.params._id})
         .then( (docs) => {
             if (docs) {
-                res.render('/user/:_id/tasklist', { task : docs });
+                res.render('tasklist', { task : docs });
 
             } else {
                 res.status(404);
