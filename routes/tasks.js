@@ -77,7 +77,7 @@ router.get('/user/:_id/tasklist/completed', function(req, res, next){
 
     Task.find( {user: req.user._id, completed:true} )
         .then( (docs) => {
-            res.render('tasks_completed', { title: 'Completed tasks' , tasks: docs });
+            res.render('user/:_id/tasklist/tasks_completed', { title: 'Completed tasks' , tasks: docs });
         }).catch( (err) => {
         next(err);
     });

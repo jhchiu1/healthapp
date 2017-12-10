@@ -116,10 +116,10 @@ router.post('/user/:_id/modUser', function(req, res, next) {
 // GET info about 1 client
 router.get('/user/:_id', function(req, res, next) {
 
-    Task.find( { user :  req.params._id})
-        .then( (docs) => {
-            if (docs) {
-                res.render('user', { user : docs });
+    User.findOne( { _id:  req.params._id})
+        .then( (doc) => {
+            if (doc) {
+                res.render('user', { user: doc });
 
             } else {
                 res.status(404);
@@ -131,5 +131,24 @@ router.get('/user/:_id', function(req, res, next) {
         });
 });
 
+
+
+// GET info about 1 client
+router.get('/user/:_id/tasklist', function(req, res, next) {
+
+    Task.find( { user :  req.params._id})
+        .then( (docs) => {
+            if (docs) {
+                res.render('/user/:_id/tasklist', { task : docs });
+
+            } else {
+                res.status(404);
+                next(Error("User not found"));
+            }
+        })
+        .catch( (err) => {
+            next(err);
+        });
+});
 
 module.exports = router;
