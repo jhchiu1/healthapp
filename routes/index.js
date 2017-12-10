@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-var Task = require('../models/task');
+var User = require('../models/user');
 
 
 /* Middleware, to verify if the user is authenticated */
@@ -116,10 +116,10 @@ router.post('/user/:_id/modUser', function(req, res, next) {
 // GET info about 1 client
 router.get('/user/:_id', function(req, res, next) {
 
-    User.findOne( { _id:  req.params._id})
-        .then( (doc) => {
-            if (doc) {
-                res.render('user', { user: doc });
+    Task.find( { user :  req.params._id})
+        .then( (docs) => {
+            if (docs) {
+                res.render('tasks', { task : docs });
 
             } else {
                 res.status(404);
@@ -130,8 +130,6 @@ router.get('/user/:_id', function(req, res, next) {
             next(err);
         });
 });
-
-
 
 // GET info about 1 client
 router.get('/user/:_id/tasklist', function(req, res, next) {

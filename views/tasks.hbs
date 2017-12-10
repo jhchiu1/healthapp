@@ -1,6 +1,7 @@
 <a href="/auth"><h1>[ HealthApp &#9829; ]</h1></a><p>
-<h1>TASKLIST</h1>
 
+<h1>TASKLIST</h1>
+<div class="taskinfo">
 <div class="addtask">
     <form id="addtask_form" action="/user/{{user._id}}/tasklist/add" method="POST" class="add_form">
         <input id="addtask_text" name="text" type="text" placeholder="Enter a task" required>
@@ -21,12 +22,12 @@
         <p>{{@tasks}}: <a href="/user/{{user._id}}/tasklist/{{this._id}}">{{this.text}}{{this.dateCreated}}</a></p></a></p>
 
 
-        <form action="/done" method="POST" class="done_form">
+        <form action="/user/{{user._id}}/tasklist/done" method="POST" class="done_form">
             <input type="hidden" name="_id" value="{{this._id}}">
             <input class="done_button" type="submit" name="done" value="Done">
         </form>
 
-        <form action="/delete" method="POST" class="delete_form">
+        <form action="/user/{{user._id}}/tasklist/delete" method="POST" class="delete_form">
             <input type="hidden" name="_id" value="{{this._id}}">
             <input class="delete_button" type="submit" name="done" value="Delete">
         </form>
@@ -36,9 +37,10 @@
 
     <div class="alldone">
         {{#if tasks}}
-            <form action="/alldone" method="POST">
+            <form action="/user/{{user._id}}/tasklist//alldone" method="POST">
                 <input class="all_done_button" type="submit" value="Everything is done!">
             </form>
         {{/if}}</div>
 
+</div>
 </div>

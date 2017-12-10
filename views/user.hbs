@@ -22,7 +22,10 @@
         <p id="userpara">{{user.first}} is male</p>
     {{/if}}
 
-    <h2>Height </h2>
+    <h2>Age</h2>
+    <p id="userpara">{{user.age}} years old</p>
+
+    <h2>Height</h2>
 
     <p id="userpara">{{user.height}} ft</p>
 
@@ -38,24 +41,25 @@
 
     <p id="userpara">{{user.notes}}</p>
 </div>
+<br>
+<br>
 
+<button id="myBtn">Modify USER Information</button>
 
-        <button id="myBtn">Modify USER Information</button>
+<!-- Modal form added here.  Used W3 schools tutorial for modal. -->
+<div id="myModal" class="modal">
 
-        <!-- Modal form added here.  Used W3 schools tutorial for modal. -->
-        <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
 
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-
-                <form method="POST" action="/user/_id/modUser">
-                    <div class="modprof">
-                        <h2>Modify Client Profile</h2></div>
-                    <div class="clientprof">
+        <form method="POST" action="/user/_id/modUser">
+            <div class="modprof">
+                <h2>Modify Client Profile</h2></div>
+            <div class="clientprof">
                     <p>First Name <input name="first" maxlength="20" required value="{{user.first}}"></p><br>
                 <p>Last Name <input name="last" maxlength="20" required value="{{user.last}}"></p>
-                <p>Sex <input name="sex" type="text" list="sexoptions"><br>
+                <p>Sex <input name="sexinfo" type="text" list="sexoptions"><br>
                     <datalist id="sexoptions"><option value="Male" label="Male"></option>
                         <option value="Female" label="Female"></option></datalist></p>
                 <p>Age <input type="number" min="5" max="125" name="age" required value="{{user.age}}"> years old</p>
@@ -69,25 +73,28 @@
                 <br><input class="submit_button" type="submit" value="S  U  B  M  I  T  ">
                     </div>
                 </form>
-
         </div>
         <br><br>
-
     </div>
 
-</div>
 
 
-<p><a href="/auth"><input class="home_button" type="submit" value="H  O  M  E  "></a>
+<p><a href="/auth"><input class="home_button" type="submit" value="H  O  M  E  "></a></p>
 
     <a href="/auth/logout"><input class="logout_button" type="submit" value="LOGOUT"></a>
+<!--<div class="user_tasklist">
+<p><form action="/user/{{user._id}}/tasklist" method="POST">
+    <input type="hidden" name="_id" value="{{user._id}}">
+    <input class="tasklist_button" type="submit" value="TASKLIST">
+</form>
+</div> -->
 
-<p><a href="/user/{{user._id}}/tasklist"><input class="tasklist_button" type="submit" value="TASKLIST"></a>
+<p><a href="/user/{{user._id}}/tasklist"><input class="tasklist_button" type="submit" value="TASKLIST"></a></p>
 
 <div class="delete_user">  <!-- Delete button for each client page -->
-    <form action="/user/_id/delete" method="POST" class="delete_form">   <!-- Delete button -->
+    <form action="/user/{{user._id}}/delete" method="POST" class="delete_form">   <!-- Delete button -->
         <input type="hidden" name="_id" value="{{user._id}}">
-        <input class="deleteuser_button" type="submit" name="done" value="Delete this User">
+        <input class="deleteuser_button" type="submit" name="delete" value="Delete this User">
     </form>
     <br>
 </div>

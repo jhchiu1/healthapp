@@ -73,7 +73,7 @@ router.get('/task/:_id', function(req, res, next) {
 
 
 /* GET completed tasks */
-router.get('/completed', function(req, res, next){
+router.get('/user/:_id/tasklist/completed', function(req, res, next){
 
     Task.find( {user: req.user._id, completed:true} )
         .then( (docs) => {
@@ -112,7 +112,7 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
 
 
 /* POST task done */
-router.post('/done', function(req, res, next) {
+router.post('/user/:_id/tasklist/done', function(req, res, next) {
 
     // Is this is the user's task?
 
@@ -131,7 +131,7 @@ router.post('/done', function(req, res, next) {
 
 
 /* POST all tasks done */
-router.post('/alldone', function(req, res, next) {
+router.post('/user/:_id/tasklist/alldone', function(req, res, next) {
 
     Task.updateMany( { user: req.user._id, completed : false } , { $set : { completed : true, dateCompleted: new Date()} } )
         .then( (result) => {
@@ -147,7 +147,7 @@ router.post('/alldone', function(req, res, next) {
 
 
 /* POST task delete */
-router.post('/delete', function(req, res, next){
+router.post('/user/:_id/tasklist/delete', function(req, res, next){
 
     Task.deleteOne( { user: req.user._id, _id : req.body._id } )
         .then( (result) => {
