@@ -3,8 +3,8 @@
 <h1>EXERCISES</h1>
 <div class="taskinfo">
 <div class="addtask">
-    <form method="POST" action="/task/{{user.id}}/tasklist/add" class="add_form">
-        <input id="addtask_text" name="text" type="text" placeholder="Enter a task" required>
+    <form method="POST" action="/user/{{user.id}}/tasklist/add" class="add_form">
+        <input id="addtask_text" name="text" type="text" placeholder="Enter an exercise" required>
         <input type="hidden" name="_id" value="{{user._id}}">
         <input class="addtask_button" type="submit" value="ADD Exercise">
     </form>
@@ -19,7 +19,7 @@
 
 <div class="tasklist">
     {{#each tasks}}
-        <p>{{@tasklist}}: <a href="/user/{{user.id}}/task/tasklist/{{this._id}}">{{this.text}}</a></p>
+        <p>{{@tasklist}}: <a href="/user/{{user.id}}/tasklist/{{this._id}}">{{this.text}}</a></p>
 
 
         <form action="/user/{{user._id}}/tasklist/done" method="POST" class="done_form">

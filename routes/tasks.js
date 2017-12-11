@@ -86,7 +86,7 @@ router.get('/user/:_id/tasklist/completed', function(req, res, next){
 
 
 /* POST new task */
-router.post('/user/:_id/task/tasklist/add', function(req, res, next){
+router.post('/user/:_id/tasklist/add', function(req, res, next){
 
     if (!req.user || !req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
