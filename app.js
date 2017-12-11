@@ -14,7 +14,7 @@ var index = require('./routes/index')
 var users = require('./routes/users');
 
 // Set the environment variable MONGO_URL, mine is using mlab db
-var db_url = "mongodb://dbUser:password23@ds123956.mlab.com:23956/healthapp";
+var db_url = process.env.MONGO_URL; //  "mongodb://dbUser:password23@ds123956.mlab.com:23956/healthapp";
 
 // And connect to mongoose, log success or error
 mongoose.Promise = global.Promise;  // use native ES6 promises
@@ -44,8 +44,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 var store = MongoDBStore( { uri: db_url, collection : 'healthapp_sessions'} );
 
 var mongo_pw = process.env.MONGO_PW;
-var url = 'mongodb://dbUser:password23@ds123956.mlab.com:23956/healthapp';
-var session_url = 'mongodb://dbUser:password23@ds123956.mlab.com:23956/healthapp';
+var url = process.env.MONGO_URL; //  'mongodb://dbUser:password23@ds123956.mlab.com:23956/healthapp';
+var session_url =process.env.MONGO_URL; //  'mongodb://dbUser:password23@ds123956.mlab.com:23956/healthapp';
 
 // Configure flash messaging. Do this after cookieParser
 app.use(session({
