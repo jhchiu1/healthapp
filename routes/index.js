@@ -49,7 +49,8 @@ router.post('/user/add', function(req, res, next) {
         height: req.body.height,
         weight: req.body.weight,
         heart: req.body.heart,
-        notes: req.body.notes
+        notes: req.body.notes,
+        datesUpdate: req.body.datesUpdate
     };
 
     user.save()
@@ -58,14 +59,12 @@ router.post('/user/add', function(req, res, next) {
             res.redirect('/')
         })
         .catch( (err) => {
-
             if (err.name === 'ValidationError') {
                 // Check for validation errors
 
                 req.flash('error', err.message);
                 res.redirect('/');
             }
-
             else {
                 // Not either of these? Pass to generic error handler to display 500 error
                 next(err);
@@ -78,20 +77,16 @@ router.post('/user/:_id/delete', function(req, res, next){    //Delete button is
 
     User.deleteOne( { _id : req.body._id } )
         .then( (result) => {
-
             if (result.deletedCount === 1) {
                 res.redirect('/');
-
             } else {
                 // The task was not found. Report 404 error.
                 res.status(404).send('Error deleting user: not found');
             }
         })
         .catch((err) => {
-
             next(err);   // Will handle invalid ObjectIDs or DB errors.
         });
-
 });
 
 /* POST modify 1 client. */
@@ -111,7 +106,6 @@ router.post('/user/:_id/modUser', function(req, res, next) {
         }).catch((err) => {
         next(err);
     })
-
 });
 
 // GET info about 1 client
@@ -131,7 +125,6 @@ router.get('/user/:_id', function(req, res, next) {
             next(err);
         });
 });
-
 
 
 // GET info about 1 client, connect to their tasklist
