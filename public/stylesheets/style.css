@@ -180,8 +180,8 @@ h2 {
 }
 
 .tasklist_button {
-  background-color: purple;
-  color: white;
+  background-color: #ffcc00;
+  color: purple;
   font-family: Tahoma;
   display: inline-block;
   padding: 5px 15px;
@@ -214,7 +214,7 @@ h2 {
 }
 
 .logout_button {
-  background-color: #B924A3  ;
+  background-color: #9966ff ;
   color: white;
   font-family: Tahoma;
   display: inline-block;

@@ -1,7 +1,7 @@
 <a href="/auth"><h1>[ HealthApp &#9829; ]</h1></a><p>
 
 <div class="new-user">
-<h4>Add A Client . . .</h4>
+<h4>Add A Client . . .</h4>                 <!-- Add a new client form -->
 <form method="POST" action="/user/add">
 <p>First Name <input name="first" maxlength="20" required /><br>
     Last Name <input name="last" maxlength="20" required /><br></p>
@@ -38,7 +38,7 @@
 <div class="usersummary">
     <h2>Client List</h2>
 <div class="user-name-list">
-        {{#each user}}
+        {{#each user}}                  <!-- Link to Client Profile -->
         <h3>{{this.profile}}
             <P><a href="/user/{{this._id}}">{{this.first}} {{this.last}}</h3></a></p>
         {{else}}

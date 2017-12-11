@@ -78,17 +78,16 @@
     </div>
 
 
-
-<p><a href="/auth"><input class="home_button" type="submit" value="H  O  M  E  "></a></p>
-
-<p><a href="/auth/logout"><input class="logout_button" type="submit" value="LOGOUT"></a></p>
-
 <p><div class="user_tasklist">
 <p><form action="/user/{{user._id}}/tasklist" method="GET">
     <input type="hidden" name="_id" value="{{user._id}}">
     <input class="tasklist_button" type="submit" value="TASKLIST">
 </form>
 </div></p>
+
+<p><a href="/auth"><input class="home_button" type="submit" value="H  O  M  E  "></a></p>
+
+<p><a href="/auth/logout"><input class="logout_button" type="submit" value="LOGOUT"></a></p>
 
 <div class="delete_user">  <!-- Delete button for each client page -->
     <form action="/user/{{user._id}}/delete" method="POST" class="delete_form">   <!-- Delete button -->

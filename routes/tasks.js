@@ -96,7 +96,7 @@ router.post('/user/:_id/task/tasklist/add', function(req, res, next){
 
     else {
 
-        // Insert into database. New tasks are assumed to be not completed.
+        // Insert into db. New tasks are assumed to be not completed.
         var dateCreated = new Date();
         // Create a new Task, an instance of the Task schema, and call save()
         new Task( { user: req.user, task: req.user._id, text: req.body.text, completed: false, dateCreated: new Date()} ).save()
@@ -105,7 +105,7 @@ router.post('/user/:_id/task/tasklist/add', function(req, res, next){
                 res.redirect('/user/:_id/tasklist');
             })
             .catch((err) => {
-                next(err);   // most likely to be a database error.
+                next(err);   // most likely to be db error.
             });
     }
 });
