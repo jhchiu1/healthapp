@@ -268,94 +268,9 @@ h2 {
   margin-left: 565px;
 }
 
-.completed_button {
-  background-color: #7DF5A6;
-  color: purple;
-  font-family: Tahoma;
-  display: inline-block;
-  padding: 5px 15px;
-  font-size: 15px;
-  cursor: crosshair;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  border:  2px solid #19f3f3;
-  border-radius: 3px;
-  box-shadow: 0 1px black;
-  margin-left: 10px;
-}
-
-.donetask_button {
-  background-color: #7DF5A6;
-  color: purple;
-  font-family: Tahoma;
-  display: inline-block;
-  padding: 5px 15px;
-  font-size: 15px;
-  cursor: crosshair;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  border:  2px solid #19f3f3;
-  border-radius: 3px;
-  box-shadow: 0 1px black;
-  margin-left: 10px;
-}
-
 .deletetask_button {
   background-color: #B924A3;
   color: white;
-  font-family: Tahoma;
-  display: inline-block;
-  padding: 5px 15px;
-  font-size: 15px;
-  cursor: crosshair;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  border:  2px solid #19f3f3;
-  border-radius: 3px;
-  box-shadow: 0 1px black;
-  margin-left: 10px;
-}
-
-.exercises_button {
-  background-color: purple;
-  color: white;
-  font-family: Tahoma;
-  display: inline-block;
-  padding: 5px 15px;
-  font-size: 15px;
-  cursor: crosshair;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  border:  2px solid #19f3f3;
-  border-radius: 3px;
-  box-shadow: 0 1px black;
-  margin-left: 10px;
-}
-
-.completedex_button {
-  background-color: #9966ff;
-  color: white;
-  font-family: Tahoma;
-  display: inline-block;
-  padding: 5px 15px;
-  font-size: 15px;
-  cursor: crosshair;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  border:  2px solid #19f3f3;
-  border-radius: 3px;
-  box-shadow: 0 1px black;
-  margin-left: 10px;
-}
-
-.all_done_button {
-  background-color: #ffcc00;
-  color: purple;
   font-family: Tahoma;
   display: inline-block;
   padding: 5px 15px;
@@ -391,8 +306,8 @@ a:visited {
   border: 0 none;
 }
 .button:hover, .submit_button:hover, .delete_button:hover, .logout_button:hover, .home_button:hover, .login_button:hover,
-.signup_button:hover, .completed_button:hover, .add_button:hover, .tasklist_button:hover, .modify_button:hover, .addtask_button:hover,
-.deletetask_button:hover, .deleteuser_button:hover, .donetask_button:hover, .exercises_button:hover, #myBtn:hover{
+.signup_button:hover, .add_button:hover, .tasklist_button:hover, .modify_button:hover, .addtask_button:hover,
+.deletetask_button:hover, .deleteuser_button:hover, #myBtn:hover{
   background-color: #19f3f3;
   color: white;
   -webkit-animation: bounce .3s infinite alternate;
@@ -412,8 +327,7 @@ a:visited {
 
 .button:active, .submit_button:active, .delete_button:active, .logout_button:active, .home_button:active, .login_button:active,
 .signup_button:active, .add_button:active,.tasklist_button:active, .modify_button:active, .addtask_button:active,
-.delete_taskbutton:active, .deleteuser_button:active, .exercises_button:active,.donetask_button:active, .completedex_button:active,
-#myBtn:active{
+.delete_taskbutton:active, .deleteuser_button:active, #myBtn:active{
   background-color: #19f3f3;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
