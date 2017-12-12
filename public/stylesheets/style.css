@@ -54,6 +54,10 @@ body {
   margin-left: 180px;
   text-decoration: underline;
 }
+
+.taskinfo {
+  margin-left: 600px;
+}
 a {
   color: #ccffcc;
   text-decoration: none;

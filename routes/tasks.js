@@ -96,7 +96,7 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
         // Create a new Task, an instance of the Task schema, and call save()
         new Task( { user: _id , text: req.body.text, completed: false, dateCreated: new Date()} ).save()
             .then((newTask) => {
-                console.log('The new task created is: ', newTask);
+                console.log('The new exercise created is: ', newTask);
                 res.redirect('/user/' + _id + '/tasklist');
             })
             .catch((err) => {
@@ -144,7 +144,8 @@ router.post('/user/:_id/tasklist/alldone', function(req, res, next) {
 /* POST exercise delete */
 router.post('/user/:_id/tasklist/task/:_id/delete', function(req, res, next){
 
-    Task.deleteOne( { user: req.user._id, _id : req.body._id } )
+    var _id = req.params._id;
+    Task.deleteOne( { user: _id, task : req.task._id, text: req.body.text } )
         .then( (result) => {
 
             if (result.deletedCount === 1) {  // one task document deleted
