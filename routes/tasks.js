@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mongodb = require("mongodb");
 var Task = require('../models/task');
 var ObjectId = require('mongoose').mongo.ObjectId;
 
@@ -39,7 +40,6 @@ router.get('/user/:_id/tasklist', function(req, res, next) {
         });
 
 });
-
 
 /* GET details about one exercise */
 
@@ -107,14 +107,14 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
 
 
 /* POST exercise done */
-router.post('/user/:_id/tasklist/done', function(req, res, next) {
+router.post('/user/:user_id/tasklist/task/:task_id/done', function(req, res, next) {
 
     // Is this is the user's task?
 
-    Task.findOneAndUpdate( { user: req.user._id, _id: req.body._id}, {$set: {completed: true, dateCompleted: new Date()}} )
+    Task.findOneAndUpdate( { user: req.params.user_id, _id: req.params.task_id}, {$set: {completed: true, dateCompleted: new Date()}} )
         .then((updatedTask) => {
             if (updatedTask) {   // updatedTask is the document *before* the update
-                res.redirect('/user/' + _id + '/tasklist')  // One thing was updated. Redirect to home
+                res.redirect('/user/' + req.params.user_id + '/tasklist')  // One thing was updated. Redirect to home
             } else {
                 // if no updatedTask, then no matching document was found to update. 404
                 res.status(404).send("Error marking exercise done: not found");
@@ -125,31 +125,17 @@ router.post('/user/:_id/tasklist/done', function(req, res, next) {
 });
 
 
-/* POST all exercises done */
-router.post('/user/:_id/tasklist/alldone', function(req, res, next) {
-
-    Task.updateMany( { user: req.user._id, completed : false } , { $set : { completed : true, dateCompleted: new Date()} } )
-        .then( (result) => {
-            console.log("How many documents were modified? ", result.n);
-            req.flash('info', 'All exercises completed!');
-            res.redirect('/user/' + _id + '/tasklist');
-        })
-        .catch( (err) => {
-            next(err);
-        })
-
-});
-
 
 /* POST exercise delete */
-router.post('/user/:_id/tasklist/task/:_id/delete', function(req, res, next){
-
-    var _id = req.params._id;
-    Task.deleteOne( { user: _id, task : req.task._id, text: req.body.text } )
+router.post('/user/:user_id/tasklist/task/:task_id/delete', function(req, res, next){
+     var user_id = req.params.user_id;
+    var task_id = req.params.task_id;
+    Task.deleteOne( { user: user_id, _id: task_id})//, task : task_id, text: req.body.text } )
         .then( (result) => {
-
+            console.log('deleted task')
+            console.log(result);
             if (result.deletedCount === 1) {  // one task document deleted
-                res.redirect('user/' + _id + '/tasklist');
+                res.redirect('/user/' + user_id + '/tasklist');
 
             } else {
                 // The task was not found. Report 404 error.
@@ -161,16 +147,16 @@ router.post('/user/:_id/tasklist/task/:_id/delete', function(req, res, next){
         });
 
 
-    /* GET completed exercises */
-    router.get('/user/:_id/tasklist/completed', function(req, res, next){
+});
+/* GET completed exercises */
+router.get('/user/:_id/tasklist/completed', function(req, res, next){
 
-        Task.find( {user: req.user._id, completed:true} )
-            .then( (docs) => {
-                res.render('tasklist', { title: 'Completed exercises' , tasks: docs });
-            }).catch( (err) => {
-            next(err);
-        });
-
+    Task.find( {user: req.params._id, completed:true} )
+        .then( (docs) => {
+            console.log(docs)
+            res.render('tasklist', { title: 'Completed exercises' , tasks: docs });
+        }).catch( (err) => {
+        next(err);
     });
 
 });

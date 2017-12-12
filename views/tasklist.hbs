@@ -22,12 +22,12 @@
             <li><p>{{@tasklist}}: <a href="/user/{{user_id}}/tasklist/{{this._id}}">{{this.text}}<br>{{this.dateCreated}}</a></p></li>
 
 
-            <form method="POST" action="/tasks/user/{{user._id}}/tasklist/task/{{this._id}}/done" class="done_form">
+            <form method="POST" action="/tasks/user/{{user}}/tasklist/task/{{this._id}}/done" class="done_form">
                 <input type="hidden" name="_id" value="{{this._id}}">
                 <input class="donetask_button" type="submit" name="done" value="Done">
             </form>
 <p></p>
-            <form method="POST" action="/tasks/user/{{user._id}}/tasklist/task/{{this._id}}/delete" class="delete_form">
+            <form method="POST" action="/tasks/user/{{user}}/tasklist/task/{{this._id}}/delete" class="delete_form">
                 <input type="hidden" name="_id" value="{{this._id}}">
                 <input class="deletetask_button" type="submit" name="delete" value="Delete">
             </form>
@@ -39,16 +39,12 @@
 
 <p></p><br>
         <div class="navigation">
-            <a href="/"><input class="exercises_button" type="submit" value="EXERCISES"></a><p></p>
-            <a href="/completed"><input class="completedex_button" type="submit" value="Completed Exercises"></a>
+            <form method="POST" action="/tasks/user/{{user_id}}/tasklist/completed">
+            <input class="completedex_button" type="submit" value="Completed Exercises">
+            </form>
         </div>
 <p></p>
-        <div class="alldone">
-            {{#if tasks}}
-                <form action="tasks/user/{{user._id}}/tasklist//alldone" method="POST">
-                    <input class="all_done_button" type="submit" value="Finished ALL exercises!">
-                </form>
-            {{/if}}</div>
+
 
     </div>
 </div>

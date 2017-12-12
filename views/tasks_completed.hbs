@@ -1,7 +1,8 @@
 <div class="tasklist">
     {{#each tasks}}
-        <li> {{@taskslist}}: <a href="task/{{this._id}}">{{this.text}}</a> </li>
-        <form action="/alldelete" method="POST" class="delete_form">
+        {{@taskslist}}: <a href="task/{{this._id}}">{{this.text}}</a>
+        <li>{{this.text}} completed at {{this.dateCompleted}}. {{this.text}} was created on {{this.dateCreated}}</li>
+    <form action="/alldelete" method="POST" class="delete_form">
             <input type="hidden" name="_id" value="{{this._id}}">
             <input class="all_delete_button" type="submit" name="done" value="Delete All Completed Exercises!">
     {{else}}
