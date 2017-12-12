@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c5ff40d9-5dbc-47df-97a2-adba19d44c72" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/tasks.js" afterPath="$PROJECT_DIR$/routes/tasks.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/tasklist.hbs" afterPath="$PROJECT_DIR$/views/tasklist.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/tasks_completed.hbs" afterPath="$PROJECT_DIR$/views/tasks_completed.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,8 +21,8 @@
       <file leaf-file-name="tasklist.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/tasklist.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="399">
+              <caret line="29" column="16" lean-forward="true" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -33,8 +31,8 @@
       <file leaf-file-name="tasks.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/tasks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="136" column="74" lean-forward="true" selection-start-line="136" selection-start-column="74" selection-end-line="136" selection-end-column="74" />
+            <state relative-caret-position="341">
+              <caret line="38" column="22" lean-forward="true" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -159,8 +157,8 @@
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/views/tasks_completed.hbs" />
         <option value="$PROJECT_DIR$/routes/index.js" />
-        <option value="$PROJECT_DIR$/routes/tasks.js" />
         <option value="$PROJECT_DIR$/views/tasklist.hbs" />
+        <option value="$PROJECT_DIR$/routes/tasks.js" />
       </list>
     </option>
   </component>
@@ -336,7 +334,7 @@
       <workItem from="1512925358240" duration="13698000" />
       <workItem from="1513015830192" duration="6279000" />
       <workItem from="1513029282309" duration="28701000" />
-      <workItem from="1513093563499" duration="10626000" />
+      <workItem from="1513093563499" duration="10889000" />
     </task>
     <task id="LOCAL-00001" summary="Intial commit">
       <created>1511935709416</created>
@@ -597,11 +595,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513064086731</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="delete function works">
+      <created>1513104296622</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1513104296622</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="228522000" />
+    <option name="totallyTimeSpent" value="228785000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="30" width="1232" height="798" extended-state="0" />
@@ -633,7 +638,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modified auth.js successRedirect route to users to POST login and signup, added middleware to verify user is authenticated to users. js" />
     <MESSAGE value="Modified app.js and users.js to route user to their specific record. Routed user to access their tasklist" />
     <MESSAGE value="Modified tasks.js POST new task. Should redirect to /tasks" />
     <MESSAGE value="Added POST route to allow for client profile modifications, added profile handlebar and profile script for modal" />
@@ -658,7 +662,8 @@
     <MESSAGE value="Worked on add exercise function" />
     <MESSAGE value="Add task function works!!" />
     <MESSAGE value="Working on delete exercise function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working on delete exercise function" />
+    <MESSAGE value="delete function works" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete function works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -971,16 +976,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/tasklist.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="399">
+          <caret line="29" column="16" lean-forward="true" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/tasks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="136" column="74" lean-forward="true" selection-start-line="136" selection-start-column="74" selection-end-line="136" selection-end-column="74" />
+        <state relative-caret-position="341">
+          <caret line="38" column="22" lean-forward="true" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
           <folding />
         </state>
       </provider>

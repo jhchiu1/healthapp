@@ -106,25 +106,6 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
 });
 
 
-/* POST exercise done */
-router.post('/user/:user_id/tasklist/task/:task_id/done', function(req, res, next) {
-
-    // Is this is the user's task?
-
-    Task.findOneAndUpdate( { user: req.params.user_id, _id: req.params.task_id}, {$set: {completed: true, dateCompleted: new Date()}} )
-        .then((updatedTask) => {
-            if (updatedTask) {   // updatedTask is the document *before* the update
-                res.redirect('/user/' + req.params.user_id + '/tasklist')  // One thing was updated. Redirect to home
-            } else {
-                // if no updatedTask, then no matching document was found to update. 404
-                res.status(404).send("Error marking exercise done: not found");
-            }
-        }).catch((err) => {
-        next(err);
-    })
-});
-
-
 
 /* POST exercise delete */
 router.post('/user/:user_id/tasklist/task/:task_id/delete', function(req, res, next){
@@ -148,17 +129,6 @@ router.post('/user/:user_id/tasklist/task/:task_id/delete', function(req, res, n
 
 
 });
-/* GET completed exercises */
-router.get('/user/:_id/tasklist/completed', function(req, res, next){
 
-    Task.find( {user: req.params._id, completed:true} )
-        .then( (docs) => {
-            console.log(docs)
-            res.render('tasklist', { title: 'Completed exercises' , tasks: docs });
-        }).catch( (err) => {
-        next(err);
-    });
-
-});
 
 module.exports = router;
