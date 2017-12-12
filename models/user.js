@@ -7,9 +7,8 @@ var userSchema = new mongoose.Schema({
 
     local: {
         username: String,
-        password: String
+        password: String,
     },
-
     first: String,
     last: String,
     sex: {type: String, enum: ['Male', 'Female']

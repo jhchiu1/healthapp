@@ -3,7 +3,7 @@
 <h1>EXERCISES</h1>
 <div class="taskinfo">
 <div class="addtask">
-    <form method="POST" action="/user/{{user.id}}/tasklist/add" class="add_form">
+    <form method="POST" action="/tasks/user/{{user.id}}/tasklist/add" class="add_form">
         <input id="addtask_text" name="text" type="text" placeholder="Enter an exercise" required>
         <input type="hidden" name="_id" value="{{user._id}}">
         <input class="addtask_button" type="submit" value="ADD Exercise">
@@ -32,7 +32,7 @@
             <input class="delete_button" type="submit" name="done" value="Delete">
         </form>
     {{else}}
-        <p>There are no exercises. Time to schedule some!</p>
+        <p>There are no exercises. Time to create a list!</p>
     {{/each}}
 
     <div class="alldone">

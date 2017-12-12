@@ -66,8 +66,8 @@ mongoose.connect(url);
 
 app.use('/auth', auth);   // Order matters! Login page
 app.use('/users', users);        // Get user records
-app.use('/tasks', tasks);        // Tasklists
-app.use('/', index);        // For trainer to manage clients
+app.use('/tasks', tasks);        // Exercise lists
+app.use('/', index);        // Homepage for trainer to manage clients
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

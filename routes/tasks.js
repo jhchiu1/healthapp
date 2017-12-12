@@ -21,13 +21,12 @@ specify it for every router */
 
 router.use(isLoggedIn);
 
-
-/* GET home page with all incomplete tasks */
+/* GET home page with all incomplete exercises */
 router.get('/user/:_id/tasklist', function(req, res, next) {
 
     Task.find( { user: req.user._id, completed: false})
         .then( (docs) => {
-            res.render('/user/:_id/tasklist', {title: 'Incomplete Tasks', tasks: docs})
+            res.render('/user/:_id/tasklist', {title: 'Exercises', tasks: docs})
         })
         .catch( (err) => {
             next(err);
@@ -35,8 +34,7 @@ router.get('/user/:_id/tasklist', function(req, res, next) {
 
 });
 
-
-/* GET details about one task */
+/* GET details about one exercise */
 
 router.get('/task/:_id', function(req, res, next) {
 
@@ -54,7 +52,7 @@ router.get('/task/:_id', function(req, res, next) {
         .then( (task) => {
 
             if (!task) {
-                res.status(404).send('Task not found');
+                res.status(404).send('Exercise not found');
             }
             else if ( req.user._id.equals(task.user)) {
                 // Does this task belong to this user?
@@ -62,31 +60,30 @@ router.get('/task/:_id', function(req, res, next) {
             }
             else {
                 // Not this user's task. Send 403 Forbidden response
-                res.status(403).send('This is not your task, you may not view it');
+                res.status(403).send('This is not your exercise, you may not view it');
             }
         })
         .catch((err) => {
             next(err);
         })
-
 });
 
-
-/* GET completed tasks */
+/* GET completed exercises */
 router.get('/user/:_id/tasklist/completed', function(req, res, next){
 
     Task.find( {user: req.user._id, completed:true} )
         .then( (docs) => {
-            res.render('user/:_id/tasklist/completed', { title: 'Completed tasks' , tasks: docs });
+            res.render('user/:_id/tasklist/completed', { title: 'Completed exercises' , tasks: docs });
         }).catch( (err) => {
         next(err);
     });
-
 });
-
 
 /* POST new task */
 router.post('/user/:_id/tasklist/add', function(req, res, next){
+
+    var _id = req.params._id;
+    console.log("Add task for user id " + _id)
 
     if (!req.user || !req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
@@ -99,10 +96,10 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
         // Insert into db. New tasks are assumed to be not completed.
         var dateCreated = new Date();
         // Create a new Task, an instance of the Task schema, and call save()
-        new Task( { user: req.user, task: req.user._id, text: req.body.text, completed: false, dateCreated: new Date()} ).save()
+        new Task( { user: _id , text: req.body.text, completed: false, dateCreated: new Date()} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
-                res.redirect('/user/:_id/tasklist');
+                res.redirect('user/:_id/tasklist');
             })
             .catch((err) => {
                 next(err);   // most likely to be db error.
@@ -111,7 +108,7 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
 });
 
 
-/* POST task done */
+/* POST exercise done */
 router.post('/user/:_id/tasklist/done', function(req, res, next) {
 
     // Is this is the user's task?
@@ -130,40 +127,37 @@ router.post('/user/:_id/tasklist/done', function(req, res, next) {
 });
 
 
-/* POST all tasks done */
+/* POST all exercises done */
 router.post('/user/:_id/tasklist/alldone', function(req, res, next) {
 
     Task.updateMany( { user: req.user._id, completed : false } , { $set : { completed : true, dateCompleted: new Date()} } )
         .then( (result) => {
             console.log("How many documents were modified? ", result.n);
-            req.flash('info', 'All tasks marked as done!');
+            req.flash('info', 'All exercises marked as completed!');
             res.redirect('/user/:_id/tasklist/alldone');
         })
         .catch( (err) => {
             next(err);
         })
-
 });
 
-
-/* POST task delete */
+/* POST exercise delete */
 router.post('/user/:_id/tasklist/delete', function(req, res, next){
 
     Task.deleteOne( { user: req.user._id, _id : req.body._id } )
         .then( (result) => {
 
-            if (result.deletedCount === 1) {  // one task document deleted
+            if (result.deletedCount === 1) {  // one exercise document deleted
                 res.redirect('/user/:_id/tasklist/delete');
 
             } else {
                 // The task was not found. Report 404 error.
-                res.status(404).send('Error deleting task: not found');
+                res.status(404).send('Error deleting exercise: not found');
             }
         })
         .catch((err) => {
             next(err);   // Will handle invalid ObjectIDs or DB errors.
         });
-
 });
 
 module.exports = router;

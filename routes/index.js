@@ -126,14 +126,13 @@ router.get('/user/:_id', function(req, res, next) {
         });
 });
 
-
-// GET info about 1 client, connect to their tasklist
+// GET info about 1 client, connect to their exercise list
 router.get('/user/:_id/tasklist', function(req, res, next) {
 
     Task.find( { user :  req.params._id})
         .then( (docs) => {
             if (docs) {
-                res.render('tasklist', { user: req.user._id, task : docs });
+                res.render('tasklist', { user_id: req.user._id, tasks : docs });
 
             } else {
                 res.status(404);
@@ -144,5 +143,4 @@ router.get('/user/:_id/tasklist', function(req, res, next) {
             next(err);
         });
 });
-
 module.exports = router;
