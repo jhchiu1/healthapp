@@ -63,9 +63,10 @@
             <div class="clientprof">
                     <p>First Name <input name="first" maxlength="20" required value="{{user.first}}"></p><br>
                 <p>Last Name <input name="last" maxlength="20" required value="{{user.last}}"></p>
-                <p>Sex <input name="sex" type="text" list="sexinfo"><br>
+                <p>Sex <input name="sex" type="text" list="sexinfo">
                     <datalist id="sexinfo"><option value="Male" label="Male"></option>
                         <option value="Female" label="Female"></option></datalist></p>
+
                 <p>Age <input type="number" min="5" max="125" name="age" required value="{{user.age}}"> years old</p>
                 <p>Height <input type="number" min="3" max="10" name="height" required value="{{user.height}}"> ft</p>
                 <p>Weight <input type="number" min="50" max="700" name="weight" required value="{{user.weight}}"> lbs</p>
