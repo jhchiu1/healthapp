@@ -21,18 +21,25 @@ specify it for every router */
 
 router.use(isLoggedIn);
 
+
 /* GET home page with all incomplete exercises */
 router.get('/user/:_id/tasklist', function(req, res, next) {
 
+    console.log("exercise list")
+
     Task.find( { user: req.user._id, completed: false})
         .then( (docs) => {
-            res.render('/user/:_id/tasklist', {title: 'Exercises', tasks: docs})
+
+
+
+            res.render('/user/' + _id + '/tasklist', {title: 'Exercise List', tasks: docs})
         })
         .catch( (err) => {
             next(err);
         });
 
 });
+
 
 /* GET details about one exercise */
 
@@ -66,29 +73,20 @@ router.get('/task/:_id', function(req, res, next) {
         .catch((err) => {
             next(err);
         })
+
 });
 
-/* GET completed exercises */
-router.get('/user/:_id/tasklist/completed', function(req, res, next){
 
-    Task.find( {user: req.user._id, completed:true} )
-        .then( (docs) => {
-            res.render('user/:_id/tasklist/completed', { title: 'Completed exercises' , tasks: docs });
-        }).catch( (err) => {
-        next(err);
-    });
-});
-
-/* POST new task */
+/* POST new exercise */
 router.post('/user/:_id/tasklist/add', function(req, res, next){
 
     var _id = req.params._id;
-    console.log("Add task for user id " + _id)
+    console.log("Add exercise for user id " + _id)
 
     if (!req.user || !req.body || !req.body.text) {
         //no task text info, redirect to home page with flash message
-        req.flash('error', 'please enter a task');
-        res.redirect('user/:_id/tasklist');
+        req.flash('error', 'please enter an exercise');
+        res.redirect('user/' + _id +  '/tasklist');
     }
 
     else {
@@ -99,7 +97,7 @@ router.post('/user/:_id/tasklist/add', function(req, res, next){
         new Task( { user: _id , text: req.body.text, completed: false, dateCreated: new Date()} ).save()
             .then((newTask) => {
                 console.log('The new task created is: ', newTask);
-                res.redirect('user/:_id/tasklist');
+                res.redirect('/user/' + _id + '/tasklist');
             })
             .catch((err) => {
                 next(err);   // most likely to be db error.
@@ -116,10 +114,10 @@ router.post('/user/:_id/tasklist/done', function(req, res, next) {
     Task.findOneAndUpdate( { user: req.user._id, _id: req.body._id}, {$set: {completed: true, dateCompleted: new Date()}} )
         .then((updatedTask) => {
             if (updatedTask) {   // updatedTask is the document *before* the update
-                res.redirect('/')  // One thing was updated. Redirect to home
+                res.redirect('/user/' + _id + '/tasklist')  // One thing was updated. Redirect to home
             } else {
                 // if no updatedTask, then no matching document was found to update. 404
-                res.status(404).send("Error marking task done: not found");
+                res.status(404).send("Error marking exercise done: not found");
             }
         }).catch((err) => {
         next(err);
@@ -133,22 +131,24 @@ router.post('/user/:_id/tasklist/alldone', function(req, res, next) {
     Task.updateMany( { user: req.user._id, completed : false } , { $set : { completed : true, dateCompleted: new Date()} } )
         .then( (result) => {
             console.log("How many documents were modified? ", result.n);
-            req.flash('info', 'All exercises marked as completed!');
-            res.redirect('/user/:_id/tasklist/alldone');
+            req.flash('info', 'All exercises completed!');
+            res.redirect('/user/' + _id + '/tasklist');
         })
         .catch( (err) => {
             next(err);
         })
+
 });
 
+
 /* POST exercise delete */
-router.post('/user/:_id/tasklist/delete', function(req, res, next){
+router.post('/user/:_id/tasklist/task/:_id/delete', function(req, res, next){
 
     Task.deleteOne( { user: req.user._id, _id : req.body._id } )
         .then( (result) => {
 
-            if (result.deletedCount === 1) {  // one exercise document deleted
-                res.redirect('/user/:_id/tasklist/delete');
+            if (result.deletedCount === 1) {  // one task document deleted
+                res.redirect('user/' + _id + '/tasklist');
 
             } else {
                 // The task was not found. Report 404 error.
@@ -158,6 +158,20 @@ router.post('/user/:_id/tasklist/delete', function(req, res, next){
         .catch((err) => {
             next(err);   // Will handle invalid ObjectIDs or DB errors.
         });
+
+
+    /* GET completed exercises */
+    router.get('/user/:_id/tasklist/completed', function(req, res, next){
+
+        Task.find( {user: req.user._id, completed:true} )
+            .then( (docs) => {
+                res.render('tasklist', { title: 'Completed exercises' , tasks: docs });
+            }).catch( (err) => {
+            next(err);
+        });
+
+    });
+
 });
 
 module.exports = router;
